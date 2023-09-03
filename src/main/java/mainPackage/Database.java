@@ -12,5 +12,4 @@ public class Database {
         return String.valueOf(ret);
     }
 
-
 }
