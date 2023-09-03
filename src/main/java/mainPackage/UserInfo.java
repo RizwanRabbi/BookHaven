@@ -15,6 +15,10 @@ public class UserInfo {
 
     }
 
+    public UserInfo() {
+
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -39,3 +43,5 @@ public class UserInfo {
         return password;
     }
 }
+
+//
