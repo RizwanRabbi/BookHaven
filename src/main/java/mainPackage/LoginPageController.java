@@ -15,6 +15,12 @@ public class LoginPageController {
     {
 
     }
+    @FXML
+    protected void loginButtonClick (ActionEvent e)
+    {
+
+    }
+
 
 
 }
