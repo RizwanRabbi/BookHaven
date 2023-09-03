@@ -40,3 +40,4 @@ build/
 #Special Case
 ConnectDB.java
 moduleinfo.java
+pom.xml
