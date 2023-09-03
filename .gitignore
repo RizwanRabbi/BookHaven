@@ -36,3 +36,6 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+#Special Case
+ConnectDB.java
