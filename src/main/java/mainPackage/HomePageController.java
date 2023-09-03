@@ -15,11 +15,11 @@ public class HomePageController implements Initializable {
     Label t;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        t.setText(
-                userInfo.getName() +
-                        " \n" +
-                        userInfo.getEmail() +
-                        "\n has landed in the house"
-        );
+//        t.setText(
+//                userInfo.getName() +
+//                        " \n" +
+//                        userInfo.getEmail() +
+//                        "\n has landed in the house"
+//        );
     }
 }
