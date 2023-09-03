@@ -12,7 +12,7 @@
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="565.0" prefWidth="790.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainPackage.LoginPageController">
    <children>
-      <VBox alignment="CENTER" prefHeight="350.0" prefWidth="520.0">
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="520.0">
          <VBox.margin>
             <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
          </VBox.margin>
@@ -39,7 +39,7 @@
                         <Insets left="20.0" right="20.0" />
                      </HBox.margin>
                   </Text>
-                  <TextField fx:id="emailBox" maxWidth="500.0" prefHeight="26.0" prefWidth="500.0">
+                  <TextField fx:id="emailBox" maxWidth="500.0" minWidth="300.0" prefHeight="26.0" prefWidth="400.0">
                      <HBox.margin>
                         <Insets left="20.0" right="20.0" />
                      </HBox.margin>
@@ -56,7 +56,7 @@
                         <Insets left="20.0" right="20.0" />
                      </HBox.margin>
                   </Text>
-                  <TextField fx:id="passwordBox" maxWidth="500.0" prefHeight="26.0" prefWidth="500.0">
+                  <TextField fx:id="passwordBox" maxWidth="500.0" minWidth="300.0" prefHeight="26.0" prefWidth="400.0">
                      <HBox.margin>
                         <Insets left="20.0" right="20.0" />
                      </HBox.margin>
