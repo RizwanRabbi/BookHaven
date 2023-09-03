@@ -1,5 +1,5 @@
 package mainPackage;
 
-public class testDB {
+public class Database {
 
 }
