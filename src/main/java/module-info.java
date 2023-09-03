@@ -3,6 +3,7 @@ module com.example.demo {
     requires javafx.fxml;
 
     requires java.sql;
+    requires java.mail;
     opens mainPackage to javafx.fxml;
     exports mainPackage;
 }
