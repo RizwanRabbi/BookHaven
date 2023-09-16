@@ -105,5 +105,12 @@ public class Database {
         }
         return 0;
     }
+    public static void updatePassword(String pass) throws SQLException
+    {
+        Connection conn = ConnectDB.getConnection();
+        PreparedStatement pstmt = conn.prepareStatement("update users set pass = ? where email = ?");
+        pstmt.setString(1,hash(pass));
+        pstmt.setString(2,Main.email);
+    }
 }
 
