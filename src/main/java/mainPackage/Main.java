@@ -19,6 +19,7 @@ public class Main extends Application {
         stage.setMinHeight(700);
         stage.setMinWidth(1000);
         stage.show();
+        System.out.println(Database.hash("12341234!"));
     }
 
     public static void run(String[] args) {
