@@ -52,8 +52,9 @@ public class UserDashboardController implements Initializable {
                 c.author.setText(bookInfo.author);
                 c.bookName.setText(bookInfo.name);
                 c.price.setText( "৳ " + Long.toString(bookInfo.price));
-                c.bookImage.setFitHeight(219);
+                c.bookImage.setFitHeight(250);
                 c.bookImage.setImage(bookInfo.image);
+                c.isbn = bookInfo.ISBN;
                 int x = i % 5 + 1, y = i / 5 + 1;
                 gridPane.add(root, x, y);
             }
