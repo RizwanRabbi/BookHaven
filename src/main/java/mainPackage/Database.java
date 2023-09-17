@@ -124,7 +124,7 @@ public class Database {
         ResultSet rs = pstmt.executeQuery();
         while (rs.next()) {
             BookInfo bookInfo = new BookInfo();
-            bookInfo.ISBN = rs.getLong(1);
+            bookInfo.ISBN = rs.getString(1);
             bookInfo.name = rs.getString(2);
             bookInfo.author = rs.getString(3);
             bookInfo.description = rs.getString(4);

@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class BookThumbController {
+    public String isbn;
     @FXML
     public TextField author;
 
@@ -30,7 +31,7 @@ public class BookThumbController {
     }
     @FXML
     void onThumbClick(MouseEvent event) {
-
+        System.out.println("Click Click " + isbn);
     }
 
 

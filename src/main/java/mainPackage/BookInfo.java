@@ -3,7 +3,7 @@ package mainPackage;
 import javafx.scene.image.Image;
 
 public class BookInfo {
-    public Long ISBN;
+    public String ISBN;
     public String name;
     public String author;
     public String description;
