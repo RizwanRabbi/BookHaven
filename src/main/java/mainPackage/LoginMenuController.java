@@ -37,7 +37,7 @@ public class LoginMenuController
         }
         else if(loginVal == 1 || loginVal == 2)
         {
-            SceneChanger.changeTo("HomePage.fxml", event);
+            SceneChanger.changeTo("userDashboard.fxml", event);
         }
     }
     @FXML

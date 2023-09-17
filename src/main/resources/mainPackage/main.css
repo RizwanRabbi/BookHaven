@@ -1,5 +1,8 @@
 .root {
     -fx-background-color: #c4d7da;
+    -fx-background-image: url("someRandomBG.png");
+    -fx-background-size: cover;
+    -fx-background-opacity: 0.5 ;
 }
 
 .label {
@@ -38,6 +41,27 @@
     -fx-text-fill: #ffffff;
     /*-fx-font-size: 14px;*/
     -fx-background-radius: 20;
+}
+.button1 {
+    -fx-background-color: #005b65;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 15px;
+    -fx-background-radius: 0;
+}
+.button1:hover {
+    -fx-background-color: #003741;
+    /*-fx-padding: 3 30 3 30;*/
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 15px;
+    -fx-background-radius: 0;
+    -fx-cursor: clickable;
+}
+.button1:pressed {
+    -fx-background-color: #001E21;
+    /*-fx-padding: 3 30 3 30;*/
+    -fx-text-fill: #ffffff;
+    /*-fx-font-size: 14px;*/
+    /*-fx-background-radius: 20;*/
 }
 
 .exitButton {
@@ -308,4 +332,13 @@
 {
     -fx-background-color: rgba(0, 91, 101, 0.09);
 
+}
+
+.cart-icon {
+    -fx-background-image: url("cartIcon.png");
+    -fx-background-size: 95%;
+    -fx-background-repeat: no-repeat;
+}
+.cart-icon:hover {
+    -fx-background-image: url("selectedCartIcon.png");
 }

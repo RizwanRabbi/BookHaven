@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="backVB" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onThumbClick" prefHeight="366.0" prefWidth="241.0" stylesheets="@bookThumb.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainPackage.BookThumbController">
+   <children>
+      <HBox alignment="TOP_CENTER" prefHeight="220.0" prefWidth="243.0">
+         <children>
+            <ImageView fx:id="bookImage" fitHeight="239.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Lock.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+      <VBox alignment="TOP_CENTER" prefHeight="130.0" prefWidth="239.0">
+         <children>
+            <TextField fx:id="bookName" alignment="CENTER" editable="false" styleClass="selectableText" text="Book">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="author" alignment="CENTER" editable="false" styleClass="selectableText" text="Author">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="price" alignment="CENTER" editable="false" styleClass="selectableText" text="Price">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="40.0" prefWidth="266.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#onAddToCartButtonClick" styleClass="button1" text="Add To Cart" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</VBox>

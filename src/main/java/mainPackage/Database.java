@@ -1,6 +1,10 @@
 package mainPackage;
 
+import javafx.scene.image.Image;
+
+import java.io.InputStream;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class Database {
 
@@ -111,6 +115,30 @@ public class Database {
         PreparedStatement pstmt = conn.prepareStatement("update users set pass = ? where email = ?");
         pstmt.setString(1,hash(pass));
         pstmt.setString(2,Main.email);
+    }
+
+    public static ArrayList<BookInfo> getAllBooks() throws SQLException {
+        ArrayList<BookInfo> arr = new ArrayList<>();
+        Connection conn = ConnectDB.getConnection();
+        PreparedStatement pstmt = conn.prepareStatement("select * from books");
+        ResultSet rs = pstmt.executeQuery();
+        while (rs.next()) {
+            BookInfo bookInfo = new BookInfo();
+            bookInfo.ISBN = rs.getLong(1);
+            bookInfo.name = rs.getString(2);
+            bookInfo.author = rs.getString(3);
+            bookInfo.description = rs.getString(4);
+            bookInfo.genre = rs.getString(5);
+            bookInfo.price = rs.getLong(6);
+            bookInfo.quantity = rs.getLong(7);
+            InputStream is = rs.getBinaryStream(8);
+            bookInfo.image = null;
+            if(is != null) bookInfo.image = new Image(is);
+            bookInfo.pubDate = rs.getDate(9);
+            bookInfo.language = rs.getString(10);
+            arr.add(bookInfo);
+        }
+        return arr;
     }
 }
 

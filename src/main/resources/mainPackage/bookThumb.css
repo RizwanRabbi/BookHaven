@@ -1,0 +1,40 @@
+.root {
+    -fx-background-color: white;
+    -fx-border-radius: 30px;
+    -fx-border-color: #005b65;
+}
+.root:hover {
+    -fx-background-color: transparent;
+    -fx-border-radius: 30px;
+    -fx-border-width: 3px;
+    -fx-border-color: #001E21;
+}
+
+.button1 {
+    -fx-background-color: #005b65;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 15px;
+    -fx-border-radius:30px;
+    /*-fx-background-radius: 0;*/
+}
+.button1:hover {
+    -fx-background-color: #003741;
+    /*-fx-padding: 3 30 3 30;*/
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 15px;
+    -fx-cursor: clickable;
+}
+.button1:pressed {
+    -fx-background-color: #001E21;
+    /*-fx-padding: 3 30 3 30;*/
+    -fx-text-fill: #ffffff;
+    /*-fx-font-size: 14px;*/
+    /*-fx-background-radius: 20;*/
+}
+
+.selectableText {
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+    -fx-highlight-fill: #004e59;
+    -fx-highlight-text-fill: #ffffff;
+}
