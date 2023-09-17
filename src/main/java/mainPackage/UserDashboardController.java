@@ -51,7 +51,7 @@ public class UserDashboardController implements Initializable {
                 BookThumbController c = loader.getController();
                 c.author.setText(bookInfo.author);
                 c.bookName.setText(bookInfo.name);
-                c.price.setText( Long.toString(bookInfo.price));
+                c.price.setText( "৳ " + Long.toString(bookInfo.price));
                 c.bookImage.setImage(bookInfo.image);
                 int x = i % 4 + 1, y = i / 4 + 1;
                 gridPane.add(root, x, y);
