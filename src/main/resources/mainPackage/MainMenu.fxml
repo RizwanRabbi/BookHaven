@@ -47,7 +47,7 @@
                         <Font size="18.0" />
                     </font>
                 </Button>
-                <Button mnemonicParsing="false" onAction="#onExitButtonClick" prefHeight="42.0" prefWidth="182.0" styleClass="exitButton" text="Exit">
+                <Button mnemonicParsing="false" onAction="#onExitButtonClick" prefHeight="42.0" prefWidth="182.0" styleClass="exitButton" text="Home">
                     <font>
                         <Font size="18.0" />
                     </font>

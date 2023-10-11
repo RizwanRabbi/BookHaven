@@ -18,9 +18,10 @@ public class MainMenuController {
     }
     @FXML
     protected void onExitButtonClick(ActionEvent event) throws IOException {
-        Node oldButton = (Node) event.getSource();
-        Stage myStage = (Stage) oldButton.getScene().getWindow();
-        myStage.close();
+        SceneChanger.changeTo("userDashboard.fxml", event);
+//        Node oldButton = (Node) event.getSource();
+//        Stage myStage = (Stage) oldButton.getScene().getWindow();
+//        myStage.close();
     }
 
 }
