@@ -6,8 +6,10 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Main extends Application {
+    public static ArrayList<CartItem> tempCart;
     public static String email, firstName, lastName, password, accountType;
     public static int otp;
     @Override
@@ -20,7 +22,8 @@ public class Main extends Application {
         stage.setMinHeight(700);
         stage.setMinWidth(1000);
         stage.show();
-        System.out.println(Database.hash("12341234!"));
+
+        tempCart = new ArrayList<>();
     }
 
     public static void run(String[] args) {

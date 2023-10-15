@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class LoginMenuController
 {
@@ -38,6 +39,12 @@ public class LoginMenuController
         else if(loginVal == 1 || loginVal == 2)
         {
             SceneChanger.changeTo("userDashboard.fxml", event);
+            if(!Main.tempCart.isEmpty())
+            {
+                for (CartItem u : Main.tempCart)
+                    u.addToUserCart(Main.email);
+                Main.tempCart = new ArrayList<>();
+            }
         }
     }
     @FXML
