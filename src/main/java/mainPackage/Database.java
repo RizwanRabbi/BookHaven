@@ -23,7 +23,7 @@ public class Database {
         UserInfo uInfo = new UserInfo();
         Connection conn = ConnectDB.getConnection();
 
-        String q = "select * from users where email = ?";
+        String q = "select * from userinfo where email = ?";
         try {
             PreparedStatement ptsd = conn.prepareStatement(q) ;
             ptsd.setString(1,email);
@@ -32,7 +32,7 @@ public class Database {
             while (rs.next()) {
                 uInfo.email = rs.getString(1);
                 uInfo.fname = rs.getString(2);
-                uInfo.lname = rs.getString(2);
+                uInfo.lname = rs.getString(3);
 
             }
             q = "select pass from users where email = ?";
