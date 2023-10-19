@@ -2,13 +2,18 @@ package mainPackage;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.sql.SQLException;
+
 public class BookThumbController {
+    @FXML
+    Button addCartButton;
     public String isbn;
     @FXML
     public TextField author;
@@ -26,8 +31,23 @@ public class BookThumbController {
     public TextField price;
 
     @FXML
-    void onAddToCartButtonClick(ActionEvent event) {
+    void onAddToCartButtonClick(ActionEvent event) throws SQLException {
 
+        if (Main.email != null)
+        {
+            if(!Database.alreadyInCart(Main.email, isbn))
+            {
+                Database.addToCart(Main.email,isbn, 1);
+            }
+        }
+        else
+        {
+            CartItem t = new CartItem( isbn,1);
+            Main.tempCart.add(t);
+        }
+
+        addCartButton.setText("Added To Cart");
+        addCartButton.setDisable(true);
     }
     @FXML
     void onThumbClick(MouseEvent event) {

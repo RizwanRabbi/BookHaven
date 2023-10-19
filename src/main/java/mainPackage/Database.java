@@ -115,6 +115,7 @@ public class Database {
         PreparedStatement pstmt = conn.prepareStatement("update users set pass = ? where email = ?");
         pstmt.setString(1,hash(pass));
         pstmt.setString(2,Main.email);
+        pstmt.executeUpdate();
     }
 
     public static ArrayList<BookInfo> getAllBooks() throws SQLException {
@@ -140,5 +141,53 @@ public class Database {
         }
         return arr;
     }
+
+    public static boolean alreadyInCart(String email, String isbn) throws SQLException {
+        Connection conn= ConnectDB.getConnection();
+        PreparedStatement ptsd= conn.prepareStatement("select * from cart where email = ? and isbn = ?");
+        ptsd.setString(1,email);
+        ptsd.setString(2,isbn);
+        ResultSet rs = ptsd.executeQuery();
+        while(rs.next())
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public static void addToCart(String email, String isbn, int quantity) throws SQLException {
+        Connection conn= ConnectDB.getConnection();
+        PreparedStatement ptsd= conn.prepareStatement("insert into cart (email, isbn, quantity) values (?,?,?)");
+        ptsd.setString(1,email);
+        ptsd.setString(2,isbn);
+        ptsd.setInt(3,quantity);
+        try{
+            ptsd.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            String errormessage = e.getMessage();
+            System.out.println("Error In Add to Cart :" + errormessage);
+            e.printStackTrace();
+        }
+    }
+    public static void removeFromCart(String email, String isbn) throws SQLException {
+        Connection conn= ConnectDB.getConnection();
+        PreparedStatement ptsd= conn.prepareStatement("delete from cart where email = ? and isbn = ?");
+        ptsd.setString(1,email);
+        ptsd.setString(2,isbn);
+
+        try{
+            ptsd.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            String errormessage = e.getMessage();
+            System.out.println("\n\nError in Delete From Cart :" + errormessage);
+            e.printStackTrace();
+        }
+    }
+
 }
 
