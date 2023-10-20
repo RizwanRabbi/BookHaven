@@ -10,6 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class BookThumbController {
     @FXML
@@ -42,8 +43,18 @@ public class BookThumbController {
         }
         else
         {
-            CartItem t = new CartItem( isbn,1);
-            Main.tempCart.add(t);
+            boolean flag = true;
+            for (CartItem i: Main.tempCart)
+            {
+                if(Objects.equals(i.ISBN, isbn)) {
+                    flag = false;
+                    break;
+                }
+            }
+            if(flag) {
+                CartItem t = new CartItem(isbn, 1);
+                Main.tempCart.add(t);
+            }
         }
 
         addCartButton.setText("Added To Cart");
