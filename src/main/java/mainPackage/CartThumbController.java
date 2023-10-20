@@ -44,28 +44,38 @@ public class CartThumbController {
                 + book.cartQuantity + " = "
                 + book.price * book.cartQuantity);
     }
-    @FXML
-    void minusButtonClicked(ActionEvent event) throws SQLException {
-        book.cartQuantity = book.cartQuantity - 1;
-        if(book.cartQuantity == 1)
-            minusButton.setDisable(true);
-        plusButton.setDisable(false);
-        updateLabels();
-        if(Main.email != null)
-            Database.updateCart(Main.email, book.ISBN, book.cartQuantity);
-        else ;
-        Main.tempCart.get(index).quantity--;
-    }
 
     @FXML
-    void plusButtonClicked(ActionEvent event) throws SQLException {
+    void plusButtonClicked(ActionEvent event) throws SQLException, IOException {
         book.cartQuantity = book.cartQuantity + 1;
         if(book.quantity == book.cartQuantity)
             plusButton.setDisable(true);
         minusButton.setDisable(false);
         updateLabels();
         Database.updateCart(Main.email, book.ISBN, book.cartQuantity);
-        Main.tempCart.get(index).quantity++;
+        if(Main.email != null)
+            Database.updateCart(Main.email, book.ISBN, book.cartQuantity);
+        else
+            Main.tempCart.get(index).quantity++;
+
+        SceneChanger.changeTo("Cart.fxml", bookNameLabel);
+    }
+
+    @FXML
+    void minusButtonClicked(ActionEvent event) throws SQLException, IOException {
+        book.cartQuantity = book.cartQuantity - 1;
+
+        if(book.cartQuantity == 1)
+            minusButton.setDisable(true);
+        plusButton.setDisable(false);
+        updateLabels();
+
+        if(Main.email != null)
+            Database.updateCart(Main.email, book.ISBN, book.cartQuantity);
+        else
+            Main.tempCart.get(index).quantity--;
+
+        SceneChanger.changeTo("Cart.fxml", bookNameLabel);
     }
     void initialize()
     {
@@ -78,6 +88,7 @@ public class CartThumbController {
             minusButton.setDisable(true);
         if(book.quantity == book.cartQuantity)
             plusButton.setDisable(true);
+
     }
 
     @FXML
