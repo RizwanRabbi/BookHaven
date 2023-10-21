@@ -16,12 +16,17 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="453.0" prefWidth="791.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainPackage.CartController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="453.0" prefWidth="817.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainPackage.CartController">
    <children>
-      <HBox prefHeight="63.0" prefWidth="600.0">
+      <HBox fx:id="header" prefHeight="63.0" prefWidth="600.0">
          <children>
-            <HBox minWidth="-Infinity" prefHeight="63.0" prefWidth="294.0">
+            <HBox alignment="CENTER_LEFT" minWidth="-Infinity" prefHeight="63.0" prefWidth="306.0">
                <children>
+                  <Button id="backIcon" mnemonicParsing="false" onAction="#onGobackButtonClick" prefHeight="40.0" prefWidth="40.0" stylesheets="@main.css">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Button>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
                         <Text fill="#242d35" onMouseClicked="#goDashboard" strokeType="OUTSIDE" strokeWidth="0.0" text="BOOKHAVEN" wrappingWidth="218.13665771484375">

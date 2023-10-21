@@ -74,7 +74,7 @@ public class CartThumbController {
         book.cartQuantity =  Long.min(book.quantity,book.cartQuantity);
         bookNameLabel.setText(book.name);
         authorLabel.setText(book.author);
-        stockLabel.setText("** "+ book.quantity +" in stock");
+        stockLabel.setText("* "+ book.quantity +" in stock");
         imageBaksho.setImage(book.image);
         updateLabels();
         if(book.cartQuantity == 1)

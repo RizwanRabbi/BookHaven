@@ -23,8 +23,12 @@ import java.util.ResourceBundle;
 public class CartController implements Initializable {
 
     public static ArrayList<CartItem> cartItems;
+    public static String returnTo;
     @FXML
-    private HBox cartIcon;
+    private HBox header;
+
+//    @FXML
+//    private HBox cartIcon;
 
     @FXML
     private GridPane gridPane;
@@ -46,7 +50,7 @@ public class CartController implements Initializable {
     public static ArrayList<BookInfo> books;
     @FXML
     void goDashboard(MouseEvent event) throws IOException {
-        SceneChanger.changeTo("userDashboard.fxml", cartIcon);
+        SceneChanger.changeTo("userDashboard.fxml", header);
     }
 
     @FXML
@@ -57,7 +61,10 @@ public class CartController implements Initializable {
     @FXML
     void onProfileImageClick(MouseEvent event) throws IOException {
         System.out.println("Profile");
-        SceneChanger.changeTo("MainMenu.fxml", cartIcon);
+        if(Main.email == null)
+            SceneChanger.changeTo("MainMenu.fxml", header);
+        else
+            SceneChanger.changeTo("UserProfile.fxml", header);
     }
 
     @FXML
@@ -116,7 +123,10 @@ public class CartController implements Initializable {
         }
         totalBox.setText("Total: "+ total +"\n+Delivery Fee");
     }
-
+    @FXML
+    void onGobackButtonClick(ActionEvent event) throws IOException {
+        SceneChanger.changeTo(returnTo, event);
+    }
     @FXML
     void onProceedToBuyClicked(ActionEvent event) {
 
