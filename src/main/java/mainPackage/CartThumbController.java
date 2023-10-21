@@ -20,7 +20,8 @@ public class CartThumbController {
 
     @FXML
     private Label authorLabel;
-
+    @FXML
+    private ImageView imageBaksho;
     @FXML
     private Label bookNameLabel;
 
@@ -48,11 +49,7 @@ public class CartThumbController {
     @FXML
     void plusButtonClicked(ActionEvent event) throws SQLException, IOException {
         book.cartQuantity = book.cartQuantity + 1;
-        if(book.quantity == book.cartQuantity)
-            plusButton.setDisable(true);
-        minusButton.setDisable(false);
-        updateLabels();
-        Database.updateCart(Main.email, book.ISBN, book.cartQuantity);
+
         if(Main.email != null)
             Database.updateCart(Main.email, book.ISBN, book.cartQuantity);
         else
@@ -64,11 +61,6 @@ public class CartThumbController {
     @FXML
     void minusButtonClicked(ActionEvent event) throws SQLException, IOException {
         book.cartQuantity = book.cartQuantity - 1;
-
-        if(book.cartQuantity == 1)
-            minusButton.setDisable(true);
-        plusButton.setDisable(false);
-        updateLabels();
 
         if(Main.email != null)
             Database.updateCart(Main.email, book.ISBN, book.cartQuantity);
@@ -83,12 +75,12 @@ public class CartThumbController {
         bookNameLabel.setText(book.name);
         authorLabel.setText(book.author);
         stockLabel.setText("** "+ book.quantity +" in stock");
+        imageBaksho.setImage(book.image);
         updateLabels();
         if(book.cartQuantity == 1)
             minusButton.setDisable(true);
         if(book.quantity == book.cartQuantity)
             plusButton.setDisable(true);
-
     }
 
     @FXML

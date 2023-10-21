@@ -10,8 +10,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="97.0" prefWidth="700.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainPackage.CartThumbController">
+<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="919.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainPackage.CartThumbController">
    <children>
+      <ImageView fx:id="imageBaksho" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+         <HBox.margin>
+            <Insets left="20.0" right="20.0" />
+         </HBox.margin>
+      </ImageView>
       <VBox alignment="CENTER_LEFT" prefHeight="64.0" prefWidth="370.0" HBox.hgrow="ALWAYS">
          <children>
             <Label fx:id="bookNameLabel" prefHeight="30.0" prefWidth="513.0" style="-fx-font-weight: bold;" text="Bookname" VBox.vgrow="SOMETIMES">

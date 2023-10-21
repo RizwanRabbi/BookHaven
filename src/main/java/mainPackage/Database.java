@@ -260,7 +260,8 @@ public class Database {
                 "cover, " +
                 "books.quantity, " +
                 "cart.quantity, " +
-                "books.isbn " +
+                "books.isbn, " +
+                "cover"+
                 "from books, cart where books.isbn = cart.isbn and cart.email = ?");
         ptsd.setString(1,email);
         ResultSet rs = ptsd.executeQuery();
@@ -276,6 +277,8 @@ public class Database {
             b.quantity = rs.getLong(5);
             b.cartQuantity = rs.getLong(6);
             b.ISBN = rs.getString(7);
+
+
             books.add(b);
         }
 
