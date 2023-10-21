@@ -11,7 +11,10 @@
     -fx-font-family: "system";
     -fx-alignment: center;
 }
-
+.leftAlignedLabel {
+    -fx-font-size: empty;
+    -fx-alignment: left;
+}
 .exceptionLabel {
     -fx-font-size: 16;
     -fx-text-fill: "red";
@@ -200,6 +203,7 @@
 #quizThumbHBox:hover
 {
     -fx-background-color: #005b65;
+    -fx-background-color: rgba(0, 0, 0, 0.73);
 
 }
 #quizThumbHBox:pressed
@@ -343,4 +347,24 @@
 }
 .cart-icon:hover {
     -fx-background-image: url("selectedCartIcon.png");
+}
+
+
+
+.plusMinusButton {
+    -fx-background-color: #005b65;
+    /*#007286;*/
+    /*-fx-padding: 3 30 3 30;*/
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 15px;
+    -fx-background-radius: 20;
+}
+.plusMinusButton:hover {
+    -fx-background-color: #003741;
+    -fx-text-fill: #ffffff;
+    -fx-cursor: clickable;
+}
+.plusMinusButton:pressed {
+    -fx-background-color: #001E21;
+    -fx-text-fill: #ffffff;
 }

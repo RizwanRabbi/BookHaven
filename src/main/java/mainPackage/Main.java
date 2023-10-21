@@ -22,11 +22,12 @@ public class Main extends Application {
         stage.setMinHeight(700);
         stage.setMinWidth(1000);
         stage.show();
-
         tempCart = new ArrayList<>();
+        System.out.println(tempCart.size() + "size");
     }
 
     public static void run(String[] args) {
         launch();
     }
+
 }

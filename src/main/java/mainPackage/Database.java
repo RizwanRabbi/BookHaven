@@ -141,6 +141,35 @@ public class Database {
         }
         return arr;
     }
+    public static ArrayList<BookInfo> getBooksGivenCartInfo(ArrayList<CartItem> cart) throws SQLException {
+        ArrayList<BookInfo> arr = new ArrayList<>();
+        Connection conn = ConnectDB.getConnection();
+        PreparedStatement pstmt = conn.prepareStatement("select * from books where isbn = ?");
+        for (CartItem i: cart)
+        {
+            pstmt.setString(1, i.ISBN);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                BookInfo bookInfo = new BookInfo();
+                bookInfo.ISBN = rs.getString(1);
+                bookInfo.name = rs.getString(2);
+                bookInfo.author = rs.getString(3);
+                bookInfo.description = rs.getString(4);
+                bookInfo.genre = rs.getString(5);
+                bookInfo.price = rs.getLong(6);
+                bookInfo.quantity = rs.getLong(7);
+                InputStream is = rs.getBinaryStream(8);
+                bookInfo.image = null;
+                if(is != null) bookInfo.image = new Image(is);
+                bookInfo.pubDate = rs.getDate(9);
+                bookInfo.language = rs.getString(10);
+                bookInfo.cartQuantity = i.quantity;
+                arr.add(bookInfo);
+                bookInfo.print();
+            }
+        }
+        return arr;
+    }
 
     public static boolean alreadyInCart(String email, String isbn) throws SQLException {
         Connection conn= ConnectDB.getConnection();
@@ -189,5 +218,83 @@ public class Database {
         }
     }
 
+    public static void updateCart(String email, String isbn, Long quantity) throws SQLException {
+        Connection conn= ConnectDB.getConnection();
+        PreparedStatement ptsd= conn.prepareStatement("update cart set quantity = ? where email = ? and isbn = ?");
+        ptsd.setLong(1,quantity);
+        ptsd.setString(2,email);
+        ptsd.setString(3,isbn);
+        try{
+            ptsd.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            String errormessage = e.getMessage();
+            System.out.println("Error In Updating Cart :" + errormessage);
+            e.printStackTrace();
+        }
+    }
+    public static ArrayList<CartItem> getUserCartInfo(String email) throws SQLException {
+        Connection conn = ConnectDB.getConnection();
+        ArrayList<CartItem> cart = new ArrayList<>();
+        PreparedStatement ptsd = conn.prepareStatement("select * from cart where email = ?");
+        ptsd.setString(1,email);
+        ResultSet rs = ptsd.executeQuery();
+        while(rs.next())
+        {
+            CartItem t = new CartItem(rs.getString(2), rs.getInt(1));
+            cart.add(t);
+        }
+
+        return cart;
+    }
+
+    public static ArrayList<BookInfo> getUserCartBooks(String email) throws SQLException {
+        ArrayList<BookInfo> books = new ArrayList<>();
+
+        Connection conn = ConnectDB.getConnection();
+        PreparedStatement ptsd = conn.prepareStatement("select " +
+                "name, " +
+                "author, " +
+                "price, " +
+                "cover, " +
+                "books.quantity, " +
+                "cart.quantity, " +
+                "books.isbn " +
+                "from books, cart where books.isbn = cart.isbn and cart.email = ?");
+        ptsd.setString(1,email);
+        ResultSet rs = ptsd.executeQuery();
+        while(rs.next())
+        {
+            BookInfo b = new BookInfo();
+            b.name = rs.getString(1);
+            b.author = rs.getString(2);
+            b.price = rs.getLong(3);
+            InputStream is = rs.getBinaryStream(4);
+            b.image = null;
+            if(is != null) b.image = new Image(is);
+            b.quantity = rs.getLong(5);
+            b.cartQuantity = rs.getLong(6);
+            b.ISBN = rs.getString(7);
+            books.add(b);
+        }
+
+        return books;
+    }
+    public static void emptyCart(String email) throws SQLException {
+        Connection conn= ConnectDB.getConnection();
+        PreparedStatement ptsd= conn.prepareStatement("delete from cart where email = ?");
+        ptsd.setString(1,email);
+
+
+        try{
+            ptsd.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            System.out.println("\n\nError in Deleting whole cart :" );
+            e.printStackTrace();
+        }
+    }
 }
 

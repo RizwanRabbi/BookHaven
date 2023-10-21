@@ -63,8 +63,8 @@ public class UserDashboardController implements Initializable {
         }
     }
     @FXML
-    void onCartIconClick(MouseEvent event) {
-        System.out.println("Cart");
+    void onCartIconClick(MouseEvent event) throws IOException {
+        SceneChanger.changeTo("Cart.fxml", cartIcon);
     }
 
     @FXML
