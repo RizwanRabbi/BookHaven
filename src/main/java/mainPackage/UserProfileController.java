@@ -19,6 +19,7 @@ import java.util.ResourceBundle;
 public class UserProfileController implements Initializable {
 
     public static UserInfo currentUser;
+    public static String returnTo;
     @FXML
     private TextField emailField;
 
@@ -47,7 +48,7 @@ public class UserProfileController implements Initializable {
 
     @FXML
     void onGoBackButtonClick(ActionEvent event) throws IOException {
-        SceneChanger.changeTo("userDashboard.fxml", event);
+        SceneChanger.changeTo(returnTo, event);
     }
 
     @FXML

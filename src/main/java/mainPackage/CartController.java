@@ -61,6 +61,7 @@ public class CartController implements Initializable {
     @FXML
     void onProfileImageClick(MouseEvent event) throws IOException {
         System.out.println("Profile");
+        UserProfileController.returnTo = "Cart.fxml";
         if(Main.email == null)
             SceneChanger.changeTo("MainMenu.fxml", header);
         else
