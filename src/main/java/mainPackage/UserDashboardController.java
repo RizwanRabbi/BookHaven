@@ -70,7 +70,10 @@ public class UserDashboardController implements Initializable {
     @FXML
     void onProfileImageClick(MouseEvent event) throws IOException {
         System.out.println("Profile");
-        SceneChanger.changeTo("MainMenu.fxml", cartIcon);
+        if(Main.email == null)
+            SceneChanger.changeTo("MainMenu.fxml", cartIcon);
+        else
+            SceneChanger.changeTo("UserProfile.fxml", cartIcon);
     }
 
     @FXML

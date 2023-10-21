@@ -260,17 +260,19 @@
 
 .text-area {
     -fx-font-size: 15;
-    -fx-text-fill: blaPck;
+    -fx-text-fill: black;
     -fx-control-inner-background: transparent;
-    -fx-background-color: tranparent;
+    -fx-prompt-text-fill: rgba(0, 0, 0, 0.5);
+    /*-fx-control-inner-background: rgba(215, 248, 240, 0.5);*/
+    -fx-background-color: transparent;
     -fx-border-color: #005b65;
     -fx-border-radius: 20;
     -fx-padding: 5px;
 }
 
 .borderlessTextArea {
-    -fx-font-size: 15;
-    -fx-text-fill: black;
+    /*-fx-font-size: 15;*/
+    /*-fx-text-fill: black;*/
     -fx-control-inner-background: transparent;
     -fx-background-color: tranparent;
     -fx-border-color: transparent;
@@ -307,10 +309,10 @@
     -fx-background-color: #002a2c;
 }
 
-. make_an_Exception1 {
+.make_an_Exception1 {
     -fx-font-size: 50;
 }
-. make_an_Exception2 {
+.make_an_Exception2 {
     -fx-font-size: 25;
     -fx-font-weight: bold;
 }
@@ -321,7 +323,7 @@
     -fx-text-fill: #208338;
     -fx-control-inner-background: #e8e8e8;
     -fx-border-width: 8px;
-    /*-fx-font-weight: bold;*/
+    /*-fx-font-weight: bold;*/    /*-fx-font-weight: bold;*/
 }
 
 

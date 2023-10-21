@@ -5,6 +5,8 @@ public class UserInfo {
     public String lname;
     public String email;
     public String password;
+    public String phoneNo;
+    public String address;
 
     public UserInfo(String fname, String lname, String email, String password) {
 
