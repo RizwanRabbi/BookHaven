@@ -93,7 +93,7 @@
                <children>
                   <Button mnemonicParsing="false" onAction="#onUploadButtonClick" prefHeight="40.0" prefWidth="100.0" text="Upload" />
                   <HBox HBox.hgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" onAction="#onRemoveButtonClick" prefHeight="40.0" prefWidth="100.0" styleClass="exitButton" text="Remove " />
+                  <Button fx:id="removeButton" mnemonicParsing="false" onAction="#onRemoveButtonClick" prefHeight="40.0" prefWidth="100.0" styleClass="exitButton" text="Remove " />
                </children>
             </HBox>
             <Button minHeight="-Infinity" mnemonicParsing="false" onAction="#onSaveButtonClick" prefHeight="40.0" prefWidth="210.0" text="Save Information" />
