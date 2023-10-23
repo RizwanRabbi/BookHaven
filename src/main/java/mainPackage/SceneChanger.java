@@ -19,6 +19,7 @@ public class SceneChanger {
         FXMLLoader root = new FXMLLoader(Main.class.getResource(s));
         Node oldButton = (Node) event.getSource();
         Scene scene = new Scene(root.load(), oldButton.getScene().getWidth(), oldButton.getScene().getHeight());
+        scene.setUserData(root.getController());
         Stage myStage = (Stage) oldButton.getScene().getWindow();
         myStage.setScene(scene);
         myStage.setMinHeight(700);
@@ -45,7 +46,7 @@ public class SceneChanger {
         FXMLLoader root = new FXMLLoader(Main.class.getResource(s));
         Node oldButton = event;
         Scene scene = new Scene(root.load(), oldButton.getScene().getWidth(), oldButton.getScene().getHeight());
-
+        scene.setUserData(root.getController());
         Stage myStage = getCurrentStage();
         myStage.setScene(scene);
         myStage.setMinHeight(700);
@@ -57,6 +58,7 @@ public class SceneChanger {
         FXMLLoader root = new FXMLLoader(Main.class.getResource(s));
         Node oldButton = event;
         Scene scene = new Scene(root.load(), oldButton.getScene().getWidth(), oldButton.getScene().getHeight());
+        scene.setUserData(root.getController());
         Stage myStage = getCurrentStage();
         myStage.setScene(scene);
         myStage.setMinHeight(700);
@@ -68,6 +70,7 @@ public class SceneChanger {
         FXMLLoader root = new FXMLLoader(Main.class.getResource(s));
         Node oldButton = event;
         Scene scene = new Scene(root.load(), oldButton.getScene().getWidth(), oldButton.getScene().getHeight());
+        scene.setUserData(root.getController());
         Stage myStage = getCurrentStage();
         myStage.setScene(scene);
         myStage.setMinHeight(700);

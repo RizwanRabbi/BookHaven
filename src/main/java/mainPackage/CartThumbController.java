@@ -24,14 +24,10 @@ public class CartThumbController {
     private ImageView imageBaksho;
     @FXML
     private Label bookNameLabel;
-
-
     @FXML
     private Label priceLabel;
-
     @FXML
     private Label quantityLabel;
-
     @FXML
     private Label stockLabel;
     @FXML
