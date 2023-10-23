@@ -38,13 +38,13 @@ public class LoginMenuController
         }
         else if(loginVal == 1 || loginVal == 2)
         {
-            SceneChanger.changeTo("userDashboard.fxml", event);
             if(!Main.tempCart.isEmpty())
             {
                 for (CartItem u : Main.tempCart)
                     u.addToUserCart(Main.email);
                 Main.tempCart = new ArrayList<>();
             }
+            SceneChanger.changeTo("userDashboard.fxml", event);
         }
     }
     @FXML

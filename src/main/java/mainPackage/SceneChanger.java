@@ -28,7 +28,7 @@ public class SceneChanger {
     }
 
 
-    private static Stage getCurrentStage()
+    public static Stage getCurrentStage()
     {
         for (Window window : Window.getWindows()) {
             if (window instanceof Stage) {

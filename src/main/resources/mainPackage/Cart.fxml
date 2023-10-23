@@ -56,11 +56,6 @@
             </HBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="63.0" prefWidth="303.0">
                <children>
-                  <HBox fx:id="cartIcon" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onCartIconClick" prefHeight="57.0" prefWidth="57.0" styleClass="cart-icon">
-                     <HBox.margin>
-                        <Insets right="50.0" />
-                     </HBox.margin>
-                  </HBox>
                   <ImageView fx:id="profileImage" fitHeight="40.0" fitWidth="46.0" onMouseClicked="#onProfileImageClick" pickOnBounds="true" preserveRatio="true">
                      <HBox.margin>
                         <Insets right="30.0" />

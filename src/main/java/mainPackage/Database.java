@@ -298,5 +298,16 @@ public class Database {
             e.printStackTrace();
         }
     }
+
+    public static int numberOfItemsInCart(String email) throws SQLException {
+        Connection conn = ConnectDB.getConnection();
+        PreparedStatement pstmt = conn.prepareStatement("select count(isbn) from cart where email = ?");
+        pstmt.setString(1, email);
+        ResultSet rs = pstmt.executeQuery();
+        while(rs.next()) {
+            return rs.getInt(1);
+        }
+        return 0;
+    }
 }
 

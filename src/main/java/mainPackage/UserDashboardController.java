@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -37,8 +38,16 @@ public class UserDashboardController implements Initializable {
 
     @FXML
     private Button serachButton;
+    @FXML
+    public Label numberOfItems;
     ArrayList<BookInfo> bookInfos;
-
+    private boolean findInCartArray(BookInfo bookInfo) {
+        for(CartItem cartItem : Main.tempCart) {
+            if(cartItem.ISBN.equals(bookInfo.ISBN))
+                return true;
+        }
+        return false;
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
@@ -55,9 +64,16 @@ public class UserDashboardController implements Initializable {
                 c.bookImage.setFitHeight(250);
                 c.bookImage.setImage(bookInfo.image);
                 c.isbn = bookInfo.ISBN;
+                if((Main.email != null && Database.alreadyInCart(Main.email, bookInfo.ISBN)) || findInCartArray(bookInfo))
+                {
+                    c.addCartButton.setText("Added to Cart");
+                    c.addCartButton.setDisable(true);
+                }
                 int x = i % 5 + 1, y = i / 5 + 1;
                 gridPane.add(root, x, y);
             }
+            if(Main.email == null) numberOfItems.setText(Integer.toString(Main.tempCart.size()));
+            else numberOfItems.setText(Integer.toString(Database.numberOfItemsInCart(Main.email)));
         } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
