@@ -22,6 +22,7 @@ import java.util.ResourceBundle;
 
 public class CartController implements Initializable {
 
+    public static String returnTo;
     public static ArrayList<CartItem> cartItems;
     @FXML
     private HBox cartIcon;
@@ -57,6 +58,7 @@ public class CartController implements Initializable {
     @FXML
     void onProfileImageClick(MouseEvent event) throws IOException {
         System.out.println("Profile");
+        UserProfileController.returnTo = "Cart.fxml";
         if(Main.email == null)
             SceneChanger.changeTo("MainMenu.fxml", cartIcon);
         else
@@ -119,7 +121,9 @@ public class CartController implements Initializable {
         }
         totalBox.setText("Total: "+ total +"\n+Delivery Fee");
     }
-
+    public void onGobackButtonClick(ActionEvent event) throws IOException {
+        SceneChanger.changeTo(returnTo, event);
+    }
     @FXML
     void onProceedToBuyClicked(ActionEvent event) {
 
