@@ -3,7 +3,9 @@ package mainPackage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -14,6 +16,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class UserProfileEditController implements Initializable {
+    int imageChosen;
+    Image defaultImage;
     public static UserInfo accountInfo;
 
     @FXML
@@ -30,6 +34,8 @@ public class UserProfileEditController implements Initializable {
 
     @FXML
     private ImageView profilePicture;
+    @FXML
+    private Button removeButton;
 
     @FXML
     void onGoBackButtonClick(ActionEvent event) throws IOException {
@@ -38,6 +44,9 @@ public class UserProfileEditController implements Initializable {
 
     @FXML
     void onRemoveButtonClick(ActionEvent event) {
+        profilePicture.setImage(defaultImage);
+        removeButton.setDisable(true);
+        imageChosen = 0;
     }
 
     @FXML
@@ -64,9 +73,14 @@ public class UserProfileEditController implements Initializable {
 
         if(selectedFile != null)
         {
+            Image image = new Image(selectedFile.toURI().toString());
+            imageChosen = 1;
+            profilePicture.setImage(image);
+            removeButton.setDisable(false);
             System.out.println("Selected File: " + selectedFile.getAbsolutePath());
         }
         else {
+            imageChosen = 0;
             System.out.println("No file selected!");
         }
     }
@@ -74,6 +88,9 @@ public class UserProfileEditController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        // Default image Should come from database
+        defaultImage = profilePicture.getImage();
+        imageChosen = 0;
 
     }
 }

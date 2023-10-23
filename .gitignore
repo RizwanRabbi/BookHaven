@@ -39,5 +39,5 @@ build/
 
 #Special Case
 ConnectDB.java
-moduleinfo.java
+module-info.java
 pom.xml
