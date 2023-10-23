@@ -8,12 +8,13 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 
 public class ForgotPasswordController {
+    public static String returnTo;
     @FXML protected TextField email;
     @FXML protected Label label;
 
     public void onGoBackBAckButtonCLick(ActionEvent event) throws IOException
     {
-        SceneChanger.changeTo("LoginMenu.fxml", event);
+        SceneChanger.changeTo(returnTo, event);
     }
     public void onSendButtonClick(ActionEvent event) throws IOException
     {

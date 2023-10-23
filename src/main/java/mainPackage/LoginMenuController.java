@@ -55,6 +55,7 @@ public class LoginMenuController
     @FXML
     public void onForgotPasswordButtonClick(ActionEvent event) throws IOException
     {
+        ForgotPasswordController.returnTo = "LoginMenu.fxml";
         SceneChanger.changeTo("ForgotPasswordMenu.fxml", event);
     }
 }

@@ -37,6 +37,7 @@ public class UserProfileController implements Initializable {
 
     @FXML
     void onChangePwordButtonClick(ActionEvent event) throws IOException {
+        ForgotPasswordController.returnTo = "UserProfile.fxml";
         SceneChanger.changeTo("ForgotPasswordMenu.fxml", event);
     }
 
