@@ -45,6 +45,7 @@ public class LoginMenuController
                     u.addToUserCart(Main.email);
                 Main.tempCart = new ArrayList<>();
             }
+            Main.userInfo = Database.getUserInfo(Main.email);
         }
     }
     @FXML

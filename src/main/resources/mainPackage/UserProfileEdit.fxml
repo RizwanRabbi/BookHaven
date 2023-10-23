@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="913.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainPackage.UserProfileEditController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="913.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainPackage.UserProfileEditController">
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0">
          <children>
@@ -25,7 +25,18 @@
             <HBox prefHeight="104.0" prefWidth="294.0" VBox.vgrow="ALWAYS" />
             <VBox alignment="CENTER_LEFT" maxWidth="850.0" prefHeight="499.0" prefWidth="410.0">
                <children>
-                  <TextArea fx:id="nameField" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="410.0" promptText="Name : " wrapText="true">
+                  <TextArea fx:id="fnameField" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="410.0" promptText="First Name : " wrapText="true">
+                     <padding>
+                        <Insets right="40.0" />
+                     </padding>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </TextArea>
+                  <TextArea fx:id="lnameField" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="410.0" promptText="Last Name : " wrapText="true">
                      <padding>
                         <Insets right="40.0" />
                      </padding>
@@ -37,17 +48,6 @@
                      </VBox.margin>
                   </TextArea>
                   <TextArea fx:id="phoneField" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="410.0" promptText="Phone No : " wrapText="true">
-                     <padding>
-                        <Insets right="40.0" />
-                     </padding>
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </TextArea>
-                  <TextArea fx:id="emailField" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="410.0" promptText="Email : " wrapText="true">
                      <padding>
                         <Insets right="40.0" />
                      </padding>
@@ -81,9 +81,9 @@
       </VBox>
       <VBox alignment="CENTER" prefHeight="584.0" prefWidth="322.0">
          <children>
-            <ImageView fx:id="profilePicture" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="profilePicture" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <VBox.margin>
-                  <Insets top="50.0" />
+                  <Insets bottom="30.0" top="50.0" />
                </VBox.margin>
                <image>
                   <Image url="@default_dp.png" />

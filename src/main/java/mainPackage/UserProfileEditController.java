@@ -7,33 +7,38 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 
 public class UserProfileEditController implements Initializable {
+
+    public static File selectedFile;
     int imageChosen;
     Image defaultImage;
-    public static UserInfo accountInfo;
-
     @FXML
     private TextArea addressField;
 
     @FXML
-    private TextArea emailField;
+    private TextArea fnameField;
 
     @FXML
-    private TextArea nameField;
+    private TextArea lnameField;
 
     @FXML
     private TextArea phoneField;
 
     @FXML
     private ImageView profilePicture;
+
     @FXML
     private Button removeButton;
 
@@ -47,17 +52,23 @@ public class UserProfileEditController implements Initializable {
         profilePicture.setImage(defaultImage);
         removeButton.setDisable(true);
         imageChosen = 0;
+        selectedFile = null;
     }
 
     @FXML
-    void onSaveButtonClick(ActionEvent event) {
-        String editedName = nameField.getText();
-        String editedPhone = phoneField.getText();
-        String editedEmail = emailField.getText();
-        String editedAddress = addressField.getText();
+    void onSaveButtonClick(ActionEvent event) throws SQLException, IOException {
+        UserInfo u = new UserInfo();
+        u.fname = fnameField.getText();
+        u.lname = lnameField.getText();
+        u.phoneNo = phoneField.getText();
+        u.address = addressField.getText();
+        if(imageChosen == 0)
+            u.image = null;
+        else
+            u.image = profilePicture.getImage();
 
-//        System.out.println(editedName + editedPhone + editedEmail + editedAddress);
-
+        Database.updateUserInfo(u, selectedFile);
+        SceneChanger.changeTo("UserProfile.fxml", event);
     }
 
     @FXML
@@ -65,16 +76,21 @@ public class UserProfileEditController implements Initializable {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Image File (.jpg or .png)");
 
-        FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Image Files", "*.png", ".jpg", "*.jpeg");
+        FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg");
         fileChooser.getExtensionFilters().add(extensionFilter);
 
         // Show open file Dialog
-        File selectedFile = fileChooser.showOpenDialog(new Stage());
+        selectedFile = fileChooser.showOpenDialog(new Stage());
 
         if(selectedFile != null)
         {
             Image image = new Image(selectedFile.toURI().toString());
             imageChosen = 1;
+
+            Circle clip = new Circle(100,100,100);
+            profilePicture.setFitHeight(200);
+            profilePicture.setFitWidth(200);
+            profilePicture.setClip(clip);
             profilePicture.setImage(image);
             removeButton.setDisable(false);
             System.out.println("Selected File: " + selectedFile.getAbsolutePath());
@@ -88,9 +104,25 @@ public class UserProfileEditController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Default image Should come from database
-        defaultImage = profilePicture.getImage();
-        imageChosen = 0;
 
+        fnameField.setText(Main.userInfo.fname);
+        lnameField.setText(Main.userInfo.lname);
+        addressField.setText(Main.userInfo.address);
+        phoneField.setText(Main.userInfo.phoneNo);
+        defaultImage = profilePicture.getImage();
+        if(Main.userInfo.image != null)
+        {
+            Circle clip = new Circle(100,100,100);
+            profilePicture.setFitHeight(200);
+            profilePicture.setFitWidth(200);
+            profilePicture.setClip(clip);
+            profilePicture.setImage(Main.userInfo.image);
+            imageChosen = 1;
+        }
+        else
+        {
+            imageChosen = 0;
+            removeButton.setDisable(true);
+        }
     }
 }

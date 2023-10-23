@@ -1,5 +1,7 @@
 package mainPackage;
 
+import javafx.scene.image.Image;
+
 public class UserInfo {
     public String fname;
     public String lname;
@@ -7,6 +9,8 @@ public class UserInfo {
     public String password;
     public String phoneNo;
     public String address;
+
+    public Image image;
 
     public UserInfo(String fname, String lname, String email, String password) {
 
@@ -21,6 +25,15 @@ public class UserInfo {
 
     public UserInfo() {
 
+    }
+
+    void print()
+    {
+        System.out.println(email);
+        System.out.println(fname + " "+ lname);
+        System.out.println(phoneNo);
+        System.out.println(address);
+        System.out.println(image);
     }
 }
 

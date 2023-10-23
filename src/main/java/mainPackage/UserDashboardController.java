@@ -61,6 +61,16 @@ public class UserDashboardController implements Initializable {
         } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
+
+        if(Main.email!=null)
+        {
+            try {
+                Main.userInfo = Database.getUserInfo(Main.email);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
     }
     @FXML
     void onCartIconClick(MouseEvent event) throws IOException {

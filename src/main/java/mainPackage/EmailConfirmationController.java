@@ -12,7 +12,7 @@ public class EmailConfirmationController {
     @FXML protected Label label;
     @FXML protected TextField OTP;
     @FXML public void onConfirmButtonClick(ActionEvent event) throws IOException, SQLException {
-        if(Integer.valueOf(OTP.getText()) == Main.otp)
+        if(Integer.valueOf(OTP.getText()).equals(Main.otp))
         {
 //            Database.registerUser(Main.firstName, Main.lastName, Main.email, Main.password);
             SceneChanger.changeTo("ChangePasswordMenu.fxml", event);

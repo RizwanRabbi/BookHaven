@@ -2,6 +2,9 @@ package mainPackage;
 
 import javafx.scene.image.Image;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
@@ -33,7 +36,11 @@ public class Database {
                 uInfo.email = rs.getString(1);
                 uInfo.fname = rs.getString(2);
                 uInfo.lname = rs.getString(3);
-
+                InputStream is = rs.getBinaryStream(4);
+                uInfo.image = null;
+                if(is != null) uInfo.image = new Image(is);
+                uInfo.phoneNo = rs.getString(5);
+                uInfo.address = rs.getString(6);
             }
             q = "select pass from users where email = ?";
             ptsd = conn.prepareStatement(q);
@@ -47,7 +54,37 @@ public class Database {
             e.printStackTrace();
             System.out.println("User was not verified");
         }
+        uInfo.print();
         return uInfo;
+    }
+    public static void updateUserInfo(UserInfo u, File image) throws SQLException, FileNotFoundException {
+        Connection conn = ConnectDB.getConnection();
+        PreparedStatement ptsd = conn.prepareStatement("UPDATE USERINFO SET " +
+                "FIRSTNAME = ?, " +
+                "LASTNAME = ?, " +
+                "PHONE = ?, " +
+                "ADDRESS = ?, " +
+                "DP = ? " +
+                "WHERE EMAIL = ?");
+
+        ptsd.setString(1, u.fname);
+        ptsd.setString(2, u.lname);
+        ptsd.setString(3, u.phoneNo);
+        ptsd.setString(4, u.address);
+        FileInputStream fin = null;
+        if(image != null)
+        {
+            fin = new FileInputStream(image);
+            ptsd.setBinaryStream(5,fin, (int) image.length());
+        }
+        else {
+            ptsd.setBinaryStream(5, null, 0);
+        }
+        ptsd.setString(6, Main.email);
+
+        ptsd.executeUpdate();
+
+        Main.userInfo = Database.getUserInfo(Main.email);
     }
 
     public static boolean accountAlreadyExists(String email) {
@@ -75,7 +112,7 @@ public class Database {
         pstmt.setString(1, email);
         pstmt.setString(2, pass);
         pstmt.executeUpdate();
-        pstmt = conn.prepareStatement("INSERT INTO userinfo values (?,?,?)");
+        pstmt = conn.prepareStatement("INSERT INTO userinfo (email,firstname,lastname) values (?,?,?)");
         pstmt.setString(1, email);
         pstmt.setString(2, fname);
         pstmt.setString(3, lname);

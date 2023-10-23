@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Main extends Application {
+    public static UserInfo userInfo;
     public static ArrayList<CartItem> tempCart;
     public static String email, firstName, lastName, password, accountType;
     public static int otp;
