@@ -16,14 +16,15 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 //        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("MainMenu.fxml"));
+        tempCart = new ArrayList<>();
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("userDashboard.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1000, 700);
+        scene.setUserData(fxmlLoader.getController());
         stage.setTitle("BOOKHAVEN!");
         stage.setScene(scene);
         stage.setMinHeight(700);
         stage.setMinWidth(1000);
         stage.show();
-        tempCart = new ArrayList<>();
         System.out.println(tempCart.size() + "size");
     }
 

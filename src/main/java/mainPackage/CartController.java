@@ -81,13 +81,12 @@ public class CartController implements Initializable {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-
         }
         else
         {
-            cartItems = Main.tempCart;
+//            cartItems = Main.tempCart;
             try {
-                books = Database.getBooksGivenCartInfo(cartItems);
+                books = Database.getBooksGivenCartInfo(Main.tempCart);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }

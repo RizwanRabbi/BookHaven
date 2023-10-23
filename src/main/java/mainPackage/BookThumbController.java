@@ -2,12 +2,14 @@ package mainPackage;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.sql.SQLException;
 import java.util.Objects;
@@ -31,6 +33,18 @@ public class BookThumbController {
     @FXML
     public TextField price;
 
+    private void updateCartIconWithoutLogin() {
+        Stage stage = SceneChanger.getCurrentStage();
+        Scene scene = stage.getScene();
+        UserDashboardController userDashboardController = (UserDashboardController) scene.getUserData();
+        userDashboardController.numberOfItems.setText(Integer.toString(Main.tempCart.size()));
+    }
+    private void updateCartIconWithLogin() throws SQLException {
+        Stage stage = SceneChanger.getCurrentStage();
+        Scene scene = stage.getScene();
+        UserDashboardController userDashboardController = (UserDashboardController) scene.getUserData();
+        userDashboardController.numberOfItems.setText(Integer.toString(Database.numberOfItemsInCart(Main.email)));
+    }
     @FXML
     void onAddToCartButtonClick(ActionEvent event) throws SQLException {
 
@@ -39,6 +53,7 @@ public class BookThumbController {
             if(!Database.alreadyInCart(Main.email, isbn))
             {
                 Database.addToCart(Main.email,isbn, 1);
+                updateCartIconWithLogin();
             }
         }
         else
@@ -55,6 +70,7 @@ public class BookThumbController {
                 CartItem t = new CartItem(isbn, 1);
                 Main.tempCart.add(t);
             }
+            updateCartIconWithoutLogin();
         }
 
         addCartButton.setText("Added To Cart");

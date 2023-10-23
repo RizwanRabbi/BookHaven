@@ -38,14 +38,13 @@ public class LoginMenuController
         }
         else if(loginVal == 1 || loginVal == 2)
         {
-            SceneChanger.changeTo("userDashboard.fxml", event);
             if(!Main.tempCart.isEmpty())
             {
                 for (CartItem u : Main.tempCart)
                     u.addToUserCart(Main.email);
                 Main.tempCart = new ArrayList<>();
             }
-            Main.userInfo = Database.getUserInfo(Main.email);
+            SceneChanger.changeTo("userDashboard.fxml", event);
         }
     }
     @FXML
@@ -56,6 +55,7 @@ public class LoginMenuController
     @FXML
     public void onForgotPasswordButtonClick(ActionEvent event) throws IOException
     {
+        ForgotPasswordController.returnTo = "LoginMenu.fxml";
         SceneChanger.changeTo("ForgotPasswordMenu.fxml", event);
     }
 }

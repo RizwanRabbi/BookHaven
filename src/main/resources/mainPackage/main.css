@@ -11,6 +11,14 @@
     -fx-font-family: "system";
     -fx-alignment: center;
 }
+.cart-item-number {
+    -fx-text-fill: white;
+    -fx-background-color: red;
+    -fx-background-radius: 100;
+    -fx-text-alignment: center;
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+}
 .leftAlignedLabel {
     -fx-font-size: empty;
     -fx-alignment: left;
