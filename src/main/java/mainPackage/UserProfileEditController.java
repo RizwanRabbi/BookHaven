@@ -86,8 +86,8 @@ public class UserProfileEditController implements Initializable {
         {
             Image image = new Image(selectedFile.toURI().toString());
             imageChosen = 1;
-
             Circle clip = new Circle(100,100,100);
+            profilePicture.setClip(clip);
             profilePicture.setFitHeight(200);
             profilePicture.setFitWidth(200);
             profilePicture.setClip(clip);
