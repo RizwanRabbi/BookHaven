@@ -140,4 +140,8 @@ public class CartController implements Initializable {
     void onProceedToBuyClicked(ActionEvent event) {
 
     }
+
+    public void reload() throws IOException {
+        SceneChanger.changeTo("Cart.fxml", vb);
+    }
 }

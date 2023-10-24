@@ -1,0 +1,41 @@
+.root {
+    -fx-background-color: #c4d7da;
+}
+.button {
+    -fx-background-color: #005b65;
+    /*#007286;*/
+    /*-fx-padding: 3 30 3 30;*/
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 15px;
+    -fx-background-radius: 20;
+}
+.button:hover {
+    -fx-background-color: #003741;
+    /*-fx-padding: 3 30 3 30;*/
+    -fx-text-fill: #ffffff;
+    /*-fx-font-size: 18px;*/
+    -fx-background-radius: 20;
+    -fx-cursor: clickable;
+}
+
+.exitButton {
+    -fx-background-color: #005b65;
+    /*-fx-padding: 3 30 3 30;*/
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 15px;
+    -fx-background-radius: 40;
+}
+.exitButton:hover {
+    -fx-background-color: #dc0c0c;
+    /*-fx-padding: 3 30 3 30;*/
+    -fx-text-fill: #ffffff;
+    /*-fx-font-size: 18px;*/
+    -fx-background-radius: 40;
+}
+.exitButton:pressed {
+    -fx-background-color: #210000;
+    /*-fx-padding: 3 30 3 30;*/
+    -fx-text-fill: #ffffff;
+    /*-fx-font-size: 14px;*/
+    -fx-background-radius: 40;
+}

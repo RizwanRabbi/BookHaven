@@ -80,12 +80,7 @@ public class CartThumbController {
 
     @FXML
     void onDeleteIconClicked(MouseEvent event) throws SQLException, IOException {
-        if(Main.email!=null) {
-            Database.removeFromCart(Main.email, book.ISBN);
-        }
-        else
-            Main.tempCart.remove(index);
-        SceneChanger.changeTo("Cart.fxml", bookNameLabel);
+        SceneChanger.createDeletePopup("deletePopup.fxml", authorLabel, book, index);
 
     }
 }

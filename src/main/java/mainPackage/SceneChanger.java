@@ -1,5 +1,6 @@
 package mainPackage;
 
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -7,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
@@ -75,6 +77,20 @@ public class SceneChanger {
         myStage.setScene(scene);
         myStage.setMinHeight(700);
         myStage.setMinWidth(1000);
+        myStage.show();
+    }
+
+    public static void createDeletePopup(String s, Label event, BookInfo book, int index) throws IOException {
+        deletePopupController.parent = getCurrentStage();
+        deletePopupController.book = book;
+        deletePopupController.index = index;
+        FXMLLoader root = new FXMLLoader(Main.class.getResource(s));
+        Node oldButton = event;
+        Scene scene = new Scene(root.load(), 400, 219);
+        Stage myStage = new Stage();
+        myStage.setResizable(false);
+        myStage.setScene(scene);
+        myStage.initModality(Modality.APPLICATION_MODAL);
         myStage.show();
     }
 }
