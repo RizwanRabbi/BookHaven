@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
@@ -22,11 +23,10 @@ import java.util.ResourceBundle;
 
 public class CartController implements Initializable {
 
+    @FXML
+    private VBox vb;
     public static String returnTo;
     public static ArrayList<CartItem> cartItems;
-    @FXML
-    private HBox cartIcon;
-
     @FXML
     private GridPane gridPane;
 
@@ -47,7 +47,7 @@ public class CartController implements Initializable {
     public static ArrayList<BookInfo> books;
     @FXML
     void goDashboard(MouseEvent event) throws IOException {
-        SceneChanger.changeTo("userDashboard.fxml", cartIcon);
+        SceneChanger.changeTo("userDashboard.fxml", vb);
     }
 
     @FXML
@@ -60,9 +60,9 @@ public class CartController implements Initializable {
         System.out.println("Profile");
         UserProfileController.returnTo = "Cart.fxml";
         if(Main.email == null)
-            SceneChanger.changeTo("MainMenu.fxml", cartIcon);
+            SceneChanger.changeTo("MainMenu.fxml", vb);
         else
-            SceneChanger.changeTo("UserProfile.fxml", cartIcon);
+            SceneChanger.changeTo("UserProfile.fxml", vb);
     }
 
     @FXML
