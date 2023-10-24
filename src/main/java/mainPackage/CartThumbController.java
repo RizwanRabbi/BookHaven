@@ -38,8 +38,8 @@ public class CartThumbController {
     void updateLabels() {
         quantityLabel.setText(String.valueOf(book.cartQuantity));
         priceLabel.setText("Price: " + book.price + " * "
-                + book.cartQuantity + " = "
-                + book.price * book.cartQuantity);
+                + Long.min(book.cartQuantity, book.quantity)  + " = "
+                + book.price * Long.min(book.cartQuantity, book.quantity));
     }
 
     @FXML
@@ -67,16 +67,15 @@ public class CartThumbController {
     }
     void initialize()
     {
-        book.cartQuantity =  Long.min(book.quantity,book.cartQuantity);
         bookNameLabel.setText(book.name);
         authorLabel.setText(book.author);
         stockLabel.setText("* "+ book.quantity +" in stock");
         imageBaksho.setImage(book.image);
         updateLabels();
-        if(book.cartQuantity == 1)
+        if(book.cartQuantity <= 1)
             minusButton.setDisable(true);
-        if(book.quantity == book.cartQuantity)
-            plusButton.setDisable(true);
+//        if(book.quantity == book.cartQuantity)
+//            plusButton.setDisable(true);
     }
 
     @FXML

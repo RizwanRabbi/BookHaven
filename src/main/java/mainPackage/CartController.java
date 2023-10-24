@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
@@ -14,6 +15,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 import java.net.URL;
@@ -77,6 +79,17 @@ public class CartController implements Initializable {
         if(Main.email !=null)
         {
             try {
+                UserInfo u = Database.getUserInfo(Main.email);
+                Circle clip = new Circle(22,22,22);
+                profileImage.setFitHeight(44);
+                profileImage.setFitWidth(44);
+                profileImage.setClip(clip);
+                profileImage.setImage(u.image);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
+            try {
                 books = Database.getUserCartBooks(Main.email);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -116,7 +129,7 @@ public class CartController implements Initializable {
         long total=0;
         for (BookInfo u: books)
         {
-            total += u.price * u.cartQuantity;
+            total += u.price * Long.min(u.cartQuantity, u.quantity);
         }
         totalBox.setText("Total: "+ total +"\n+Delivery Fee");
     }

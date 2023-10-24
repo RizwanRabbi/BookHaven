@@ -56,7 +56,7 @@
             </HBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="63.0" prefWidth="303.0">
                <children>
-                  <ImageView fx:id="profileImage" fitHeight="40.0" fitWidth="46.0" onMouseClicked="#onProfileImageClick" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="profileImage" fitHeight="45.0" fitWidth="45.0" onMouseClicked="#onProfileImageClick" pickOnBounds="true">
                      <HBox.margin>
                         <Insets right="30.0" />
                      </HBox.margin>

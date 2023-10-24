@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="919.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainPackage.CartThumbController">
+<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="919.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainPackage.CartThumbController">
    <children>
       <ImageView fx:id="imageBaksho" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
          <HBox.margin>
@@ -53,7 +53,7 @@
                   <Button fx:id="plusButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#plusButtonClicked" prefHeight="40.0" prefWidth="40.0" style="-fx-font-weight: bold;" styleClass="plusMinusButton" text="+" />
                </children>
             </HBox>
-            <Label fx:id="stockLabel" prefHeight="74.0" prefWidth="123.0" style="-fx-font-size: 15; -fx-text-fill: rgba(0, 0, 0, 0.73);" styleClass="leftAlignedLabel" text="**xx in stock">
+            <Label fx:id="stockLabel" prefHeight="74.0" prefWidth="123.0" style="-fx-font-size: 15; -fx-text-fill: rgba(255, 0, 0, 0.8);" styleClass="leftAlignedLabel" text="**xx in stock">
                <font>
                   <Font size="10.0" />
                </font>

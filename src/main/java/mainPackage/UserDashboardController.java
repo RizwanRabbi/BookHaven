@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 import java.net.URL;
@@ -74,6 +75,15 @@ public class UserDashboardController implements Initializable {
             }
             if(Main.email == null) numberOfItems.setText(Integer.toString(Main.tempCart.size()));
             else numberOfItems.setText(Integer.toString(Database.numberOfItemsInCart(Main.email)));
+            if(Main.email != null)
+            {
+                UserInfo u = Database.getUserInfo(Main.email);
+                Circle clip = new Circle(22,22,22);
+                profileImage.setFitHeight(44);
+                profileImage.setFitWidth(44);
+                profileImage.setClip(clip);
+                profileImage.setImage(u.image);
+            }
         } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
