@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -25,6 +26,7 @@ import java.util.ResourceBundle;
 
 public class CartController implements Initializable {
 
+    private static int total;
     @FXML
     private VBox vb;
     public static String returnTo;
@@ -45,6 +47,9 @@ public class CartController implements Initializable {
     private TextArea totalBox;
     @FXML
     private Button searchButton;
+
+    @FXML
+    private Button buyButton;
 
     public static ArrayList<BookInfo> books;
     @FXML
@@ -121,12 +126,15 @@ public class CartController implements Initializable {
             int x = 3 , y = 2*i+3;
             gridPane.add(root, x, y);
         }
+        if(books.size() == 0)
+            buyButton.setDisable(true);
+
         updateTotal();
     }
 
     public void updateTotal()
     {
-        long total=0;
+        total = 0;
         for (BookInfo u: books)
         {
             total += u.price * Long.min(u.cartQuantity, u.quantity);
@@ -137,8 +145,9 @@ public class CartController implements Initializable {
         SceneChanger.changeTo(returnTo, event);
     }
     @FXML
-    void onProceedToBuyClicked(ActionEvent event) {
-
+    void onProceedToBuyClicked(ActionEvent event) throws IOException {
+        OrderMenuController.orderTotal = total;
+        SceneChanger.changeTo("OrderMenu.fxml",event);
     }
 
     public void reload() throws IOException {

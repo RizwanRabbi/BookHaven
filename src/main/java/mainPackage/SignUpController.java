@@ -15,6 +15,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class SignUpController {
+    public static String previous;
     @FXML
     private TextField email;
     @FXML
@@ -105,6 +106,6 @@ public class SignUpController {
     @FXML
     protected void onGoBackButtonClick(ActionEvent event) throws IOException
     {
-        SceneChanger.changeTo("MainMenu.fxml", event);
+        SceneChanger.changeTo(previous, event);
     }
 }

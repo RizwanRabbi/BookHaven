@@ -10,10 +10,14 @@ import java.io.IOException;
 public class MainMenuController {
     @FXML
     protected void onLoginButtonClick(ActionEvent event) throws IOException {
+        LoginMenuController.previous = "MainMenu.fxml";
+        LoginMenuController.next = "UserDashboard.fxml";
         SceneChanger.changeTo("LoginMenu.fxml", event);
     }
     @FXML
     protected void onSignUpButtonClick(ActionEvent event) throws IOException {
+        SignUpController.previous = "MainMenu.fxml";
+        RegisterSuccessController.returnTo = "MainMenu.fxml";
         SceneChanger.changeTo("SignUpMenu.fxml", event);
     }
     @FXML

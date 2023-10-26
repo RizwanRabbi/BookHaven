@@ -66,8 +66,11 @@ public class UserProfileEditController implements Initializable {
             u.image = null;
         else
             u.image = profilePicture.getImage();
+        if( imageChosen == -1 )
+            Database.updateUserInfo(u);
+        else
+            Database.updateUserInfo(u, selectedFile);
 
-        Database.updateUserInfo(u, selectedFile);
         SceneChanger.changeTo("UserProfile.fxml", event);
     }
 
@@ -96,7 +99,7 @@ public class UserProfileEditController implements Initializable {
             System.out.println("Selected File: " + selectedFile.getAbsolutePath());
         }
         else {
-            imageChosen = 0;
+            imageChosen = -1;
             System.out.println("No file selected!");
         }
     }

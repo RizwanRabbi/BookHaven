@@ -8,7 +8,10 @@ import java.io.IOException;
 
 public class RegisterSuccessController {
     @FXML protected Button ok;
+
+    public static String returnTo;
     @FXML public void onOkButtonClick(ActionEvent event) throws IOException {
-        SceneChanger.changeTo("MainMenu.fxml", event);
+
+        SceneChanger.changeTo(returnTo, event);
     }
 }

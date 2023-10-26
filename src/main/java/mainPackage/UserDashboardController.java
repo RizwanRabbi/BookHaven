@@ -59,30 +59,30 @@ public class UserDashboardController implements Initializable {
         try {
             bookInfos = Database.getAllBooks();
             displayBooks(bookInfos);
-            if(Main.email == null) numberOfItems.setText(Integer.toString(Main.tempCart.size()));
-            else numberOfItems.setText(Integer.toString(Database.numberOfItemsInCart(Main.email)));
+
             if(Main.email != null)
             {
-                UserInfo u = Database.getUserInfo(Main.email);
-                Circle clip = new Circle(22,22,22);
-                profileImage.setFitHeight(44);
-                profileImage.setFitWidth(44);
-                profileImage.setClip(clip);
-                profileImage.setImage(u.image);
+                Main.userInfo = Database.getUserInfo(Main.email);
+                if(!Main.tempCart.isEmpty())
+                {
+                    for (CartItem u : Main.tempCart)
+                        u.addToUserCart(Main.email);
+                    Main.tempCart = new ArrayList<>();
+                }
+                if(Main.userInfo.image != null) {
+                    Circle clip = new Circle(22, 22, 22);
+                    profileImage.setFitHeight(44);
+                    profileImage.setFitWidth(44);
+                    profileImage.setClip(clip);
+                    profileImage.setImage(Main.userInfo.image);
+                }
             }
+
+            if(Main.email == null) numberOfItems.setText(Integer.toString(Main.tempCart.size()));
+            else numberOfItems.setText(Integer.toString(Database.numberOfItemsInCart(Main.email)));
         } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
-
-        if(Main.email!=null)
-        {
-            try {
-                Main.userInfo = Database.getUserInfo(Main.email);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
     }
     @FXML
     void onCartIconClick(MouseEvent event) throws IOException {

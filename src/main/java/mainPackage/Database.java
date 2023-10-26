@@ -54,6 +54,27 @@ public class Database {
         uInfo.print();
         return uInfo;
     }
+    public static void updateUserInfo(UserInfo u) throws SQLException {
+        Connection conn = ConnectDB.getConnection();
+        PreparedStatement ptsd = conn.prepareStatement("UPDATE USERINFO SET " +
+                "FIRSTNAME = ?, " +
+                "LASTNAME = ?, " +
+                "PHONE = ?, " +
+                "ADDRESS = ? " +
+                "WHERE EMAIL = ?");
+
+        ptsd.setString(1, u.fname);
+        ptsd.setString(2, u.lname);
+        ptsd.setString(3, u.phoneNo);
+        ptsd.setString(4, u.address);
+
+        ptsd.setString(5, Main.email);
+
+        ptsd.executeUpdate();
+
+        Main.userInfo = Database.getUserInfo(Main.email);
+    }
+
     public static void updateUserInfo(UserInfo u, File image) throws SQLException, FileNotFoundException {
         Connection conn = ConnectDB.getConnection();
         PreparedStatement ptsd = conn.prepareStatement("UPDATE USERINFO SET " +

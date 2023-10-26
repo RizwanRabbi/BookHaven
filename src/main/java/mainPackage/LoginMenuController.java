@@ -12,6 +12,8 @@ import java.util.ArrayList;
 
 public class LoginMenuController
 {
+    public static String previous;
+    public static String next;
     @FXML
     public TextField email;
     @FXML
@@ -24,11 +26,6 @@ public class LoginMenuController
         String Email = email.getText();
         String Password = Database.hash(password.getText());
 //        String Password = password.getText();
-        UserInfo accountInfo = Database.getUserInfo(Email);
-        Main.email = Email;
-        Main.firstName = accountInfo.fname;
-        Main.lastName = accountInfo.lname;
-        Main.accountType = "user";
 
         int loginVal = Database.loginValidation(Email, Password);
         if(loginVal == 0)
@@ -38,19 +35,25 @@ public class LoginMenuController
         }
         else if(loginVal == 1 || loginVal == 2)
         {
+            Main.email = Email;
+            UserInfo accountInfo = Database.getUserInfo(Email);
+            Main.firstName = accountInfo.fname;
+            Main.lastName = accountInfo.lname;
+            Main.accountType = "user";
             if(!Main.tempCart.isEmpty())
             {
                 for (CartItem u : Main.tempCart)
                     u.addToUserCart(Main.email);
                 Main.tempCart = new ArrayList<>();
             }
-            SceneChanger.changeTo("userDashboard.fxml", event);
+            Main.userInfo = Database.getUserInfo(Main.email);
+            SceneChanger.changeTo(next, event);
         }
     }
     @FXML
     protected void onGoBackButtonClick(ActionEvent event) throws IOException
     {
-        SceneChanger.changeTo("MainMenu.fxml", event);
+        SceneChanger.changeTo(previous, event);
     }
     @FXML
     public void onForgotPasswordButtonClick(ActionEvent event) throws IOException

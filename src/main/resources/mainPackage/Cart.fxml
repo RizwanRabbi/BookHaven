@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="vb" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="453.0" prefWidth="817.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainPackage.CartController">
+<VBox fx:id="vb" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="453.0" prefWidth="817.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainPackage.CartController">
    <children>
       <HBox fx:id="header" prefHeight="63.0" prefWidth="600.0">
          <children>
@@ -107,7 +107,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
                   </TextArea>
-                  <Button mnemonicParsing="false" onAction="#onProceedToBuyClicked" prefHeight="40.0" prefWidth="200.0" styleClass="exitButton" text="Proceed To Buy">
+                  <Button fx:id="buyButton" mnemonicParsing="false" onAction="#onProceedToBuyClicked" prefHeight="40.0" prefWidth="200.0" styleClass="exitButton" text="Proceed To Buy">
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
