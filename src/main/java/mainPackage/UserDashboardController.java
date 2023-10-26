@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -19,9 +20,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class UserDashboardController implements Initializable {
+    @FXML
+    private Button removeButton;
     @FXML
     private HBox cartIcon;
 
@@ -38,7 +42,7 @@ public class UserDashboardController implements Initializable {
     private TextField searchBar;
 
     @FXML
-    private Button serachButton;
+    private Button searchButton;
     @FXML
     public Label numberOfItems;
     ArrayList<BookInfo> bookInfos;
@@ -51,28 +55,10 @@ public class UserDashboardController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        removeButton.setDisable(true);
         try {
             bookInfos = Database.getAllBooks();
-            for(int i = 0; i < bookInfos.size(); i++)
-            {
-                BookInfo bookInfo = bookInfos.get(i);
-                FXMLLoader loader = new FXMLLoader(Main.class.getResource("bookThumb.fxml"));
-                Parent root = loader.load();
-                BookThumbController c = loader.getController();
-                c.author.setText(bookInfo.author);
-                c.bookName.setText(bookInfo.name);
-                c.price.setText( "৳ " + Long.toString(bookInfo.price));
-                c.bookImage.setFitHeight(250);
-                c.bookImage.setImage(bookInfo.image);
-                c.isbn = bookInfo.ISBN;
-                if((Main.email != null && Database.alreadyInCart(Main.email, bookInfo.ISBN)) || findInCartArray(bookInfo))
-                {
-                    c.addCartButton.setText("Added to Cart");
-                    c.addCartButton.setDisable(true);
-                }
-                int x = i % 5 + 1, y = i / 5 + 1;
-                gridPane.add(root, x, y);
-            }
+            displayBooks(bookInfos);
             if(Main.email == null) numberOfItems.setText(Integer.toString(Main.tempCart.size()));
             else numberOfItems.setText(Integer.toString(Database.numberOfItemsInCart(Main.email)));
             if(Main.email != null)
@@ -114,10 +100,70 @@ public class UserDashboardController implements Initializable {
             SceneChanger.changeTo("UserProfile.fxml", cartIcon);
     }
 
-    @FXML
-    void onSearchButtonClick(ActionEvent event) {
-        System.out.println("Search");
-        System.out.println(searchBar.getText());
+    boolean isAlphaNum(char c) {
+        return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9');
+    }
+    ArrayList<String> extractWords(String s) {
+        ArrayList<String> words = new ArrayList<>();
+        int i = 0;
+        while(i < s.length())
+        {
+            StringBuilder temp = new StringBuilder();
+            while(i < s.length() && !isAlphaNum(s.charAt(i))) i++;
+            while(i < s.length() && isAlphaNum(s.charAt(i))) {
+                temp.append(Character.toLowerCase(s.charAt(i)));
+                i++;
+            }
+            if(!temp.isEmpty()) words.add(temp.toString());
+            i++;
+        }
+        return words;
     }
 
+    private void displayBooks(ArrayList<BookInfo> bookInfos) throws IOException, SQLException {
+        gridPane.getChildren().clear();
+        for(int i = 0; i < bookInfos.size(); i++)
+        {
+            BookInfo bookInfo = bookInfos.get(i);
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("bookThumb.fxml"));
+            Parent root = loader.load();
+            BookThumbController c = loader.getController();
+            c.author.setText(bookInfo.author);
+            c.bookName.setText(bookInfo.name);
+            c.price.setText( "৳ " + Long.toString(bookInfo.price));
+            c.bookImage.setImage(bookInfo.image);
+            c.bookImage.setFitHeight(219);
+            c.isbn = bookInfo.ISBN;
+            if((Main.email != null && Database.alreadyInCart(Main.email, bookInfo.ISBN)) || findInCartArray(bookInfo))
+            {
+                c.addCartButton.setText("Added to Cart");
+                c.addCartButton.setDisable(true);
+            }
+            int x = i % 5 + 1, y = i / 5 + 1;
+            gridPane.add(root, x, y);
+        }
+    }
+    @FXML
+    void onSearchButtonClick(ActionEvent event) throws SQLException, IOException {
+        onAnythingTyped();
+    }
+    @FXML
+    void onAnythingTyped() throws SQLException, IOException {
+        ArrayList<String> words = extractWords(searchBar.getText());
+//        System.out.println(words.size());
+        System.out.println(words);
+        if(!words.isEmpty()){
+            removeButton.setDisable(false);
+//            bookInfos = Database.searchBooks(words);
+            bookInfos = Database.searchBooksByWordSequence(words);
+            displayBooks(bookInfos);
+        }
+    }
+    @FXML
+    void onRemoveButtonClick(ActionEvent event) throws SQLException, IOException {
+        ArrayList<BookInfo> bookInfos = Database.getAllBooks();
+        displayBooks(bookInfos);
+        searchBar.clear();
+        removeButton.setDisable(true);
+    }
 }

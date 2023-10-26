@@ -43,7 +43,7 @@
                         <Font size="15.0" />
                      </font>
                   </TextField>
-                  <Button fx:id="serachButton" minWidth="-Infinity" mnemonicParsing="false" onAction="#onSearchButtonClick" prefHeight="30.0" prefWidth="52.0" styleClass="button1" text="🔍" />
+                  <Button fx:id="searchButton" minWidth="-Infinity" mnemonicParsing="false" onAction="#onSearchButtonClick" prefHeight="30.0" prefWidth="52.0" styleClass="button1" text="🔍" />
                </children>
                <HBox.margin>
                   <Insets left="40.0" />

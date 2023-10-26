@@ -2,12 +2,9 @@ package mainPackage;
 
 import javafx.scene.image.Image;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.io.*;
 import java.sql.*;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Database {
 
@@ -345,6 +342,64 @@ public class Database {
             return rs.getInt(1);
         }
         return 0;
+    }
+
+    private static BookInfo getBookInfoFromRS(ResultSet rs) throws SQLException {
+        BookInfo bookInfo = new BookInfo();
+        bookInfo.ISBN = rs.getString(1);
+        bookInfo.name = rs.getString(2);
+        bookInfo.author = rs.getString(3);
+        bookInfo.description = rs.getString(4);
+        bookInfo.genre = rs.getString(5);
+        bookInfo.price = rs.getLong(6);
+        bookInfo.quantity = rs.getLong(7);
+        InputStream is = rs.getBinaryStream(8);
+        bookInfo.image = null;
+        if(is != null) bookInfo.image = new Image(is);
+        bookInfo.pubDate = rs.getDate(9);
+        bookInfo.language = rs.getString(10);
+        return bookInfo;
+    }
+    public static ArrayList<BookInfo> searchBooks(ArrayList<String> a) throws SQLException {
+        Set<BookInfo> st = new HashSet<>();
+        Connection conn = ConnectDB.getConnection();
+        // Search by name, author, genre
+        PreparedStatement pstmt = conn.prepareStatement("select * from books where LOWER(name) like ? or LOWER(author) like ?");
+        ResultSet rs;
+        for(String word: a) {
+            pstmt.setString(1, "%" + word + "%");
+            pstmt.setString(2, "%" + word + "%");
+//            pstmt.setString(4, "%" + word + "%");
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                st.add(getBookInfoFromRS(rs));
+            }
+        }
+        ArrayList<BookInfo> bookInfos = new ArrayList<>();
+        HashMap<String, Boolean> mp = new HashMap<String, Boolean>();
+        for(BookInfo b: st) {
+            if(mp.get(b.ISBN) != null) continue;
+            mp.put(b.ISBN, true);
+            bookInfos.add(b);
+        }
+        System.out.println(mp);
+        return bookInfos;
+    }
+    public static ArrayList<BookInfo> searchBooksByWordSequence(ArrayList<String> a) throws SQLException {
+        Connection conn = ConnectDB.getConnection();
+        PreparedStatement preparedStatement = conn.prepareStatement("select * from books where LOWER(name) like ? or LOWER(author) like ?");
+        String src = "%";
+        for(String words: a) {
+            src += words + "%";
+        }
+        preparedStatement.setString(1, src);
+        preparedStatement.setString(2, src);
+        ResultSet rs = preparedStatement.executeQuery();
+        ArrayList<BookInfo> bookInfos = new ArrayList<>();
+        while (rs.next()) {
+            bookInfos.add(getBookInfoFromRS(rs));
+        }
+        return bookInfos;
     }
 }
 

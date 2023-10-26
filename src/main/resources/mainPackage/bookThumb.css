@@ -1,13 +1,12 @@
 .root {
-    -fx-background-color: white;
-    -fx-border-radius: 30px;
-    -fx-border-color: #005b65;
+
 }
-.root:hover {
-    -fx-background-color: transparent;
-    -fx-border-radius: 30px;
-    -fx-border-width: 3px;
-    -fx-border-color: #001E21;
+
+.bookThumb {
+    -fx-background-radius: 20px;
+}
+.bookThumb:hover {
+    -fx-background-color: rgba(0, 91, 101, 0.09);
 }
 
 .button1 {

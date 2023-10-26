@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="474.0" prefWidth="838.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainPackage.UserDashboardController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="474.0" prefWidth="838.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainPackage.UserDashboardController">
    <children>
       <HBox prefHeight="63.0" prefWidth="600.0">
          <children>
@@ -37,12 +37,13 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="63.0" prefWidth="377.0" HBox.hgrow="ALWAYS">
                <children>
-                  <TextField fx:id="searchBar" prefHeight="30.0" prefWidth="225.0" promptText="Search Books" HBox.hgrow="ALWAYS">
+                  <TextField fx:id="searchBar" prefHeight="30.0" prefWidth="225.0" promptText="Search Books &amp;Authors" HBox.hgrow="ALWAYS">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </TextField>
-                  <Button fx:id="serachButton" minWidth="-Infinity" mnemonicParsing="false" onAction="#onSearchButtonClick" prefHeight="30.0" prefWidth="52.0" styleClass="button1" text="🔍" />
+                  <Button fx:id="removeButton" disable="true" minWidth="-Infinity" mnemonicParsing="false" onAction="#onRemoveButtonClick" prefHeight="30.0" prefWidth="52.0" styleClass="button1" text="❌" />
+                  <Button fx:id="searchButton" layoutX="228.0" layoutY="26.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#onSearchButtonClick" prefHeight="30.0" prefWidth="52.0" styleClass="button1" text="🔍" />
                </children>
                <HBox.margin>
                   <Insets left="40.0" />

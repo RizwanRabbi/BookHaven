@@ -32,15 +32,12 @@
 
 .button {
     -fx-background-color: #005b65;
-    /*#007286;*/
-    /*-fx-padding: 3 30 3 30;*/
     -fx-text-fill: #ffffff;
     -fx-font-size: 15px;
     -fx-background-radius: 20;
 }
 .button:hover {
     -fx-background-color: #003741;
-    /*-fx-padding: 3 30 3 30;*/
     -fx-text-fill: #ffffff;
     -fx-font-size: 18px;
     -fx-background-radius: 20;
@@ -48,9 +45,7 @@
 }
 .button:pressed {
     -fx-background-color: #001E21;
-    /*-fx-padding: 3 30 3 30;*/
     -fx-text-fill: #ffffff;
-    /*-fx-font-size: 14px;*/
     -fx-background-radius: 20;
 }
 .button1 {
@@ -61,7 +56,6 @@
 }
 .button1:hover {
     -fx-background-color: #003741;
-    /*-fx-padding: 3 30 3 30;*/
     -fx-text-fill: #ffffff;
     -fx-font-size: 15px;
     -fx-background-radius: 0;
@@ -69,10 +63,24 @@
 }
 .button1:pressed {
     -fx-background-color: #001E21;
-    /*-fx-padding: 3 30 3 30;*/
     -fx-text-fill: #ffffff;
-    /*-fx-font-size: 14px;*/
-    /*-fx-background-radius: 20;*/
+}
+.button2 {
+    -fx-background-color: #005b65;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 15px;
+    -fx-background-radius: 0;
+}
+.button2:hover {
+    -fx-background-color: #a92b2b;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 15px;
+    -fx-background-radius: 0;
+    -fx-cursor: clickable;
+}
+.button2:pressed {
+    -fx-background-color: #210000;
+    -fx-text-fill: #ffffff;
 }
 .exitButton {
     -fx-background-color: #005b65;
