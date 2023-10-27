@@ -66,21 +66,22 @@
     -fx-text-fill: #ffffff;
 }
 .button2 {
-    -fx-background-color: #005b65;
-    -fx-text-fill: #ffffff;
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
     -fx-font-size: 15px;
     -fx-background-radius: 0;
 }
 .button2:hover {
-    -fx-background-color: #a92b2b;
-    -fx-text-fill: #ffffff;
+    -fx-background-color: transparent;
+    -fx-text-fill: red;
     -fx-font-size: 15px;
+    -fx-font-weight: bold;
     -fx-background-radius: 0;
     -fx-cursor: clickable;
 }
 .button2:pressed {
-    -fx-background-color: #210000;
-    -fx-text-fill: #ffffff;
+    -fx-background-color: transparent;
+    -fx-text-fill: #210000;
 }
 .exitButton {
     -fx-background-color: #005b65;
