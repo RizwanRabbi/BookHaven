@@ -113,8 +113,8 @@ public class UserDashboardController implements Initializable {
         while(i < s.length())
         {
             StringBuilder temp = new StringBuilder();
-            while(i < s.length() && !isAlphaNum(s.charAt(i))) i++;
-            while(i < s.length() && isAlphaNum(s.charAt(i))) {
+            while(i < s.length() && !Character.isLetterOrDigit(s.charAt(i))) i++;
+            while(i < s.length() && Character.isLetterOrDigit(s.charAt(i))) {
                 temp.append(Character.toLowerCase(s.charAt(i)));
                 i++;
             }
