@@ -17,7 +17,7 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
 //        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("MainMenu.fxml"));
         tempCart = new ArrayList<>();
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("userDashboard.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("UserDashboard.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1000, 700);
         scene.setUserData(fxmlLoader.getController());
         stage.setTitle("BOOKHAVEN!");

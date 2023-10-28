@@ -54,7 +54,7 @@ public class CartController implements Initializable {
     public static ArrayList<BookInfo> books;
     @FXML
     void goDashboard(MouseEvent event) throws IOException {
-        SceneChanger.changeTo("userDashboard.fxml", vb);
+        SceneChanger.changeTo("UserDashboard.fxml", vb);
     }
 
     @FXML
@@ -65,11 +65,16 @@ public class CartController implements Initializable {
     @FXML
     void onProfileImageClick(MouseEvent event) throws IOException {
         System.out.println("Profile");
-        UserProfileController.returnTo = "Cart.fxml";
-        if(Main.email == null)
+        if(Main.email == null){
+            MainMenuController.next = "Cart.fxml";
+            MainMenuController.previous = "Cart.fxml";
             SceneChanger.changeTo("MainMenu.fxml", vb);
-        else
+            LoginMenuController.previous = "Cart.fxml";
+        }
+        else {
+            UserProfileController.returnTo = "Cart.fxml";
             SceneChanger.changeTo("UserProfile.fxml", vb);
+        }
     }
 
     @FXML

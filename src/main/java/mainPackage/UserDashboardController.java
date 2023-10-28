@@ -86,18 +86,22 @@ public class UserDashboardController implements Initializable {
     }
     @FXML
     void onCartIconClick(MouseEvent event) throws IOException {
-        CartController.returnTo = "userDashboard.fxml";
+        CartController.returnTo = "UserDashboard.fxml";
         SceneChanger.changeTo("Cart.fxml", cartIcon);
     }
 
     @FXML
     void onProfileImageClick(MouseEvent event) throws IOException {
         System.out.println("Profile");
-        UserProfileController.returnTo = "userDashboard.fxml";
-        if(Main.email == null)
+        if(Main.email == null) {
+            MainMenuController.next = "UserDashboard.fxml";
+            MainMenuController.previous = "UserDashboard.fxml";
             SceneChanger.changeTo("MainMenu.fxml", cartIcon);
-        else
+        }
+        else {
+            UserProfileController.returnTo = "UserDashboard.fxml";
             SceneChanger.changeTo("UserProfile.fxml", cartIcon);
+        }
     }
 
     boolean isAlphaNum(char c) {

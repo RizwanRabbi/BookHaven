@@ -1,5 +1,6 @@
 .root {
     -fx-background-color: #c4d7da;
+    /*-fx-background-color: black;*/
     -fx-background-image: url("someRandomBG.png");
     -fx-background-size: cover;
     -fx-background-opacity: 0.5 ;
@@ -390,4 +391,11 @@
 .deleteIcon:hover {
     -fx-background-image: url(deleteIconHover.png);
     -fx-background-size: cover;
+}
+
+.cartThumb {
+    -fx-background-radius: 20px;
+}
+.cartThumb:hover {
+    -fx-background-color: rgba(0, 91, 101, 0.09);
 }
