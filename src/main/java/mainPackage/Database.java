@@ -4,8 +4,11 @@ import javafx.scene.image.Image;
 
 import java.io.*;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
+import static mainPackage.ConnectDB.getConnection;
+import java.sql.Date;
 public class Database {
 
     public static String hash(String s)
@@ -21,7 +24,7 @@ public class Database {
     public static
     UserInfo getUserInfo(String email) throws SQLException {
         UserInfo uInfo = new UserInfo();
-        Connection conn = ConnectDB.getConnection();
+        Connection conn = getConnection();
 
         String q = "select * from userinfo where email = ?";
         try {
@@ -55,7 +58,7 @@ public class Database {
         return uInfo;
     }
     public static void updateUserInfo(UserInfo u) throws SQLException {
-        Connection conn = ConnectDB.getConnection();
+        Connection conn = getConnection();
         PreparedStatement ptsd = conn.prepareStatement("UPDATE USERINFO SET " +
                 "FIRSTNAME = ?, " +
                 "LASTNAME = ?, " +
@@ -76,7 +79,7 @@ public class Database {
     }
 
     public static void updateUserInfo(UserInfo u, File image) throws SQLException, FileNotFoundException {
-        Connection conn = ConnectDB.getConnection();
+        Connection conn = getConnection();
         PreparedStatement ptsd = conn.prepareStatement("UPDATE USERINFO SET " +
                 "FIRSTNAME = ?, " +
                 "LASTNAME = ?, " +
@@ -106,7 +109,7 @@ public class Database {
     }
 
     public static boolean accountAlreadyExists(String email) {
-        Connection conn = ConnectDB.getConnection();
+        Connection conn = getConnection();
 
         String q = "select * from users where email = ?";
         try {
@@ -125,7 +128,7 @@ public class Database {
     }
 
     public static void registerUser(String fname, String lname, String email, String pass) throws SQLException {
-        Connection conn = ConnectDB.getConnection();
+        Connection conn = getConnection();
         PreparedStatement pstmt = conn.prepareStatement("INSERT INTO users values (?,?)");
         pstmt.setString(1, email);
         pstmt.setString(2, pass);
@@ -138,7 +141,7 @@ public class Database {
     }
     public static int loginValidation(String email,String password)
     {
-        Connection conn = ConnectDB.getConnection();
+        Connection conn = getConnection();
         try {
             PreparedStatement preparedStatementQ = conn.prepareStatement("SELECT count(email) from users where email = " +
                     "? and pass = ?");
@@ -166,7 +169,7 @@ public class Database {
     }
     public static void updatePassword(String pass) throws SQLException
     {
-        Connection conn = ConnectDB.getConnection();
+        Connection conn = getConnection();
         PreparedStatement pstmt = conn.prepareStatement("update users set pass = ? where email = ?");
         pstmt.setString(1,hash(pass));
         pstmt.setString(2,Main.email);
@@ -175,7 +178,7 @@ public class Database {
 
     public static ArrayList<BookInfo> getAllBooks() throws SQLException {
         ArrayList<BookInfo> arr = new ArrayList<>();
-        Connection conn = ConnectDB.getConnection();
+        Connection conn = getConnection();
         PreparedStatement pstmt = conn.prepareStatement("select * from books");
         ResultSet rs = pstmt.executeQuery();
         while (rs.next()) {
@@ -198,7 +201,7 @@ public class Database {
     }
     public static ArrayList<BookInfo> getBooksGivenCartInfo(ArrayList<CartItem> cart) throws SQLException {
         ArrayList<BookInfo> arr = new ArrayList<>();
-        Connection conn = ConnectDB.getConnection();
+        Connection conn = getConnection();
         PreparedStatement pstmt = conn.prepareStatement("select * from books where isbn = ?");
         for (CartItem i: cart)
         {
@@ -227,7 +230,7 @@ public class Database {
     }
 
     public static boolean alreadyInCart(String email, String isbn) throws SQLException {
-        Connection conn= ConnectDB.getConnection();
+        Connection conn= getConnection();
         PreparedStatement ptsd= conn.prepareStatement("select * from cart where email = ? and isbn = ?");
         ptsd.setString(1,email);
         ptsd.setString(2,isbn);
@@ -241,7 +244,7 @@ public class Database {
     }
 
     public static void addToCart(String email, String isbn, int quantity) throws SQLException {
-        Connection conn= ConnectDB.getConnection();
+        Connection conn= getConnection();
         PreparedStatement ptsd= conn.prepareStatement("insert into cart (email, isbn, quantity) values (?,?,?)");
         ptsd.setString(1,email);
         ptsd.setString(2,isbn);
@@ -257,7 +260,7 @@ public class Database {
         }
     }
     public static void removeFromCart(String email, String isbn) throws SQLException {
-        Connection conn= ConnectDB.getConnection();
+        Connection conn= getConnection();
         PreparedStatement ptsd= conn.prepareStatement("delete from cart where email = ? and isbn = ?");
         ptsd.setString(1,email);
         ptsd.setString(2,isbn);
@@ -274,7 +277,7 @@ public class Database {
     }
 
     public static void updateCart(String email, String isbn, Long quantity) throws SQLException {
-        Connection conn= ConnectDB.getConnection();
+        Connection conn= getConnection();
         PreparedStatement ptsd= conn.prepareStatement("update cart set quantity = ? where email = ? and isbn = ?");
         ptsd.setLong(1,quantity);
         ptsd.setString(2,email);
@@ -290,7 +293,7 @@ public class Database {
         }
     }
     public static ArrayList<CartItem> getUserCartInfo(String email) throws SQLException {
-        Connection conn = ConnectDB.getConnection();
+        Connection conn = getConnection();
         ArrayList<CartItem> cart = new ArrayList<>();
         PreparedStatement ptsd = conn.prepareStatement("select * from cart where email = ?");
         ptsd.setString(1,email);
@@ -307,7 +310,7 @@ public class Database {
     public static ArrayList<BookInfo> getUserCartBooks(String email) throws SQLException {
         ArrayList<BookInfo> books = new ArrayList<>();
 
-        Connection conn = ConnectDB.getConnection();
+        Connection conn = getConnection();
         PreparedStatement ptsd = conn.prepareStatement("select " +
                 "name, " +
                 "author, " +
@@ -339,7 +342,7 @@ public class Database {
         return books;
     }
     public static void emptyCart(String email) throws SQLException {
-        Connection conn= ConnectDB.getConnection();
+        Connection conn= getConnection();
         PreparedStatement ptsd= conn.prepareStatement("delete from cart where email = ?");
         ptsd.setString(1,email);
 
@@ -355,7 +358,7 @@ public class Database {
     }
 
     public static int numberOfItemsInCart(String email) throws SQLException {
-        Connection conn = ConnectDB.getConnection();
+        Connection conn = getConnection();
         PreparedStatement pstmt = conn.prepareStatement("select count(isbn) from cart where email = ?");
         pstmt.setString(1, email);
         ResultSet rs = pstmt.executeQuery();
@@ -383,7 +386,7 @@ public class Database {
     }
     public static ArrayList<BookInfo> searchBooks(ArrayList<String> a) throws SQLException {
         Set<BookInfo> st = new HashSet<>();
-        Connection conn = ConnectDB.getConnection();
+        Connection conn = getConnection();
         // Search by name, author, genre
         PreparedStatement pstmt = conn.prepareStatement("select * from books where LOWER(name) like ? or LOWER(author) like ?");
         ResultSet rs;
@@ -407,7 +410,7 @@ public class Database {
         return bookInfos;
     }
     public static ArrayList<BookInfo> searchBooksByWordSequence(ArrayList<String> a) throws SQLException {
-        Connection conn = ConnectDB.getConnection();
+        Connection conn = getConnection();
         PreparedStatement preparedStatement = conn.prepareStatement("select * from books where LOWER(name) like ? or LOWER(author) like ?");
         String src = "%";
         for(String words: a) {
@@ -421,6 +424,126 @@ public class Database {
             bookInfos.add(getBookInfoFromRS(rs));
         }
         return bookInfos;
+    }
+
+
+    public static boolean orderExists(int x) throws SQLException {
+        Connection conn = ConnectDB.getConnection();
+
+        PreparedStatement ptsd = conn.prepareStatement("Select * from orders where order_id = ?");
+        ptsd.setInt(1,x);
+        ResultSet rs = ptsd.executeQuery();
+        while(rs.next())
+            return true;
+
+        return  false;
+    }
+
+    public static int generateOrderID() throws SQLException {
+
+        Random random = new Random();
+        int x = random.nextInt(Integer.MAX_VALUE);
+
+        while(Database.orderExists(x))
+        {
+            x = random.nextInt(Integer.MAX_VALUE);
+        }
+
+        return x;
+    }
+
+
+
+    public static void insertOrder(OrderInfo orderInfo) {
+        try (Connection connection = getConnection())
+        {
+            String insertQuery = "INSERT INTO orders ( " +
+                    "Order_ID, " +
+                    "Name, " +
+                    "Email, " +
+                    "Mobile_No, " +
+                    "orderDate, " +
+                    "Status, " +
+                    "Address, " +
+                    "Shipping_costs, " +
+                    "Total_amount) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
+            preparedStatement.setInt(1, orderInfo.orderID);
+            preparedStatement.setString(2, orderInfo.name);
+            preparedStatement.setString(3, orderInfo.email);
+            preparedStatement.setString(4, orderInfo.phoneNo);
+            Date today = new Date(System.currentTimeMillis());
+            preparedStatement.setDate(5, today);
+            preparedStatement.setInt(6, orderInfo.status);
+            preparedStatement.setString(7, orderInfo.address);
+            preparedStatement.setInt(8, orderInfo.shippingCosts);
+            preparedStatement.setInt(9, orderInfo.totalAmount);
+            int rowsInserted = preparedStatement.executeUpdate();
+            if (rowsInserted > 0) {
+                System.out.println("A new order has been inserted successfully.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public static ArrayList<OrderInfo> getOrdersByUserEmail(String userEmail) {
+        ArrayList<OrderInfo> orders = new ArrayList<>();
+
+        try (Connection connection = getConnection()) {
+            // Modify the SQL query to order by date in descending order
+            String selectQuery = "SELECT * FROM orders WHERE Email = ? ORDER BY orderDate DESC";
+            PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);
+            preparedStatement.setString(1, userEmail);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+            while (resultSet.next()) {
+                OrderInfo orderInfo = new OrderInfo();
+                orderInfo.orderID = resultSet.getInt("Order_ID");
+                orderInfo.name = resultSet.getString("Name");
+                orderInfo.email = resultSet.getString("Email");
+                orderInfo.phoneNo = resultSet.getString("Mobile_No");
+
+                // Format the orderDate field to "dd/MM/yyyy"
+                java.sql.Date sqlDate = resultSet.getDate("orderDate");
+                orderInfo.dateString = dateFormat.format(sqlDate);
+
+                orderInfo.status = resultSet.getInt("Status");
+                orderInfo.address = resultSet.getString("Address");
+                orderInfo.shippingCosts = resultSet.getInt("Shipping_costs");
+                orderInfo.totalAmount = resultSet.getInt("Total_amount");
+
+                orders.add(orderInfo);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return orders;
+    }
+
+    public static void insertOrderBooks(ArrayList<BookInfo> books, int orderID) throws SQLException {
+
+        Connection conn = ConnectDB.getConnection();
+        PreparedStatement ptsd = conn.prepareStatement("Insert into OrderBooks  (ORDER_ID ,ISBN ,UNIT_PRICE, QUANTITY) values (?,?,?,?)");
+        ptsd.setInt(1, orderID);
+
+        for (int i=0; i<books.size();i++ )
+        {
+            ptsd.setString(2, books.get(i).ISBN);
+            ptsd.setInt(3, (int) books.get(i).price);
+            ptsd.setInt(4, (int) books.get(i).cartQuantity);
+            ptsd.executeUpdate();
+        }
+    }
+
+    public static void deleteUserCart() throws SQLException {
+        Connection conn = ConnectDB.getConnection();
+        PreparedStatement ptsd = conn.prepareStatement("DELETE FROM CART WHERE EMAIL = ?");
+        ptsd.setString(1, Main.email);
+        ptsd.executeUpdate();
     }
 }
 

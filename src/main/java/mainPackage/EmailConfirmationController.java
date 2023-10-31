@@ -11,10 +11,9 @@ import java.sql.SQLException;
 public class EmailConfirmationController {
     @FXML protected Label label;
     @FXML protected TextField OTP;
-    @FXML public void onConfirmButtonClick(ActionEvent event) throws IOException, SQLException {
+    @FXML public void onConfirmButtonClick(ActionEvent event) throws IOException {
         if(Integer.valueOf(OTP.getText()).equals(Main.otp))
         {
-//            Database.registerUser(Main.firstName, Main.lastName, Main.email, Main.password);
             SceneChanger.changeTo("ChangePasswordMenu.fxml", event);
         }
         else

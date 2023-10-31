@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 
 import java.io.IOException;
 import java.net.URL;
@@ -18,6 +19,8 @@ public class CartThumbController {
     public BookInfo book;
     public int index;
 
+    @FXML
+    private HBox deletIcon;
     @FXML
     private Label authorLabel;
     @FXML
@@ -81,6 +84,19 @@ public class CartThumbController {
     @FXML
     void onDeleteIconClicked(MouseEvent event) throws SQLException, IOException {
         SceneChanger.createDeletePopup("deletePopup.fxml", authorLabel, book, index);
+
+    }
+
+    public void initializeForViewing()
+    {
+        
+        deletIcon.setVisible(false);
+        minusButton.setVisible(false);
+        plusButton.setVisible(false);
+
+        deletIcon.setDisable(true);
+        minusButton.setDisable(true);
+        plusButton.setDisable(true);
 
     }
 }

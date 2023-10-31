@@ -2,12 +2,9 @@ package mainPackage;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.io.PushbackInputStream;
-import java.security.PublicKey;
+
 
 public class MainMenuController {
     public static String next;
@@ -27,9 +24,6 @@ public class MainMenuController {
     @FXML
     protected void onExitButtonClick(ActionEvent event) throws IOException {
         SceneChanger.changeTo("UserDashboard.fxml", event);
-//        Node oldButton = (Node) event.getSource();
-//        Stage myStage = (Stage) oldButton.getScene().getWindow();
-//        myStage.close();
     }
 
 }

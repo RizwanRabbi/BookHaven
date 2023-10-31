@@ -113,8 +113,10 @@ public class OrderMenuController implements Initializable {
         SceneChanger.changeTo("Cart.fxml", event);
     }
 
+
     @FXML
-    void OrderButtonClick(ActionEvent event) {
+    void OrderButtonClick(ActionEvent event) throws SQLException, IOException {
+
         System.out.println("User has selected to order");
         collectUserDataFields();
 
@@ -125,7 +127,34 @@ public class OrderMenuController implements Initializable {
             return;
         }
 
-        // TODO: Database function to place order into database
+
+        OrderInfo orderInfo = inputAllOrderInfo();
+        OrderConfirmORInfoViewController.previous = "OrderMenu.fxml";
+        OrderConfirmORInfoViewController.orderInfo = orderInfo;
+        OrderConfirmORInfoViewController.books = CartController.books;
+        SceneChanger.changeTo("OrderConfirmORInfoView.fxml", event);
+    }
+
+    private OrderInfo inputAllOrderInfo() throws SQLException {
+
+        OrderInfo o = new OrderInfo();
+
+        o.orderID = Database.generateOrderID();
+
+        o.email = Main.email;   // If User not logged in it must be null
+        o.address = addressField.getText();
+        o.name = orderUserInfo.fname + " " + orderUserInfo.lname;
+        o.phoneNo = orderUserInfo.phoneNo;
+
+        if(insideDhakaRButton.isSelected())
+            o.shippingCosts = InsideDhakaDeliveryFee;
+        else
+            o.shippingCosts = OutsideDhakaDeliveryFee;
+
+        o.status = OrderInfo.PENDING;
+        o.totalAmount = orderTotal;
+
+        return o;
     }
 
     @FXML
@@ -158,8 +187,8 @@ public class OrderMenuController implements Initializable {
     {
         orderUserInfo.fname = fnameField.getText();
         orderUserInfo.lname = lnameField.getText();
-        orderUserInfo.address = addressField.getText();
         orderUserInfo.phoneNo = phoneField.getText();
+        orderUserInfo.address = addressField.getText();
         orderUserInfo.print();
 
         if(insideDhakaRButton.isSelected())

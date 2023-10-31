@@ -8,8 +8,9 @@ public class BookInfo {
     public String author;
     public String description;
     public String genre;
-    public Long price;
-    public Long quantity;
+
+    public long price;
+    public long quantity;
     public Image image;
     public java.sql.Date pubDate;
     public String language;

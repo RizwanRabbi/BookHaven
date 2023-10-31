@@ -2,7 +2,6 @@ package mainPackage;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
@@ -31,7 +30,6 @@ public class LoginMenuController
         if(loginVal == 0)
         {
             wrongPassword.setText("Incorrect Email / Password");
-            return;
         }
         else if(loginVal == 1 || loginVal == 2)
         {

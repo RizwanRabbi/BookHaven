@@ -11,7 +11,6 @@ public class RegisterSuccessController {
 
     public static String returnTo;
     @FXML public void onOkButtonClick(ActionEvent event) throws IOException {
-
         SceneChanger.changeTo(returnTo, event);
     }
 }

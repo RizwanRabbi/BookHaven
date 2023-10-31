@@ -65,7 +65,7 @@
       <VBox prefHeight="100.0" prefWidth="38.0">
          <children>
             <HBox prefHeight="30.0" prefWidth="48.0" />
-            <HBox layoutX="10.0" layoutY="10.0" onMouseClicked="#onDeleteIconClicked" prefHeight="44.0" prefWidth="25.0" styleClass="deleteIcon" />
+            <HBox fx:id="deletIcon" layoutX="10.0" layoutY="10.0" onMouseClicked="#onDeleteIconClicked" prefHeight="44.0" prefWidth="25.0" styleClass="deleteIcon" />
          </children>
          <HBox.margin>
             <Insets left="20.0" right="20.0" />
