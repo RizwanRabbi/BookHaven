@@ -81,5 +81,4 @@ public class BookThumbController {
         System.out.println("Click Click " + isbn);
     }
 
-
 }

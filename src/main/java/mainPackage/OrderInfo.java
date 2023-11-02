@@ -36,6 +36,27 @@ public class OrderInfo {
         };
     }
 
-    public OrderInfo() {}
+    public OrderInfo() {
+        this.orderID = 0; // You can choose a suitable default value
+        this.name = "";
+        this.email = "";
+        this.phoneNo = "";
+        this.status = PENDING; // Set a default status, e.g., PENDING
+        this.address = "";
+        this.shippingCosts = 0; // You can choose a suitable default value
+        this.totalAmount = 0; // You can choose a suitable default value
+        this.dateString = "";
+    }
 
+    public void print() {
+        System.out.println("Order ID: " + orderID);
+        System.out.println("Name: " + name);
+        System.out.println("Email: " + email);
+        System.out.println("Phone Number: " + phoneNo);
+        System.out.println("Status: " + statusToString(status));
+        System.out.println("Address: " + address);
+        System.out.println("Shipping Costs: " + shippingCosts);
+        System.out.println("Total Amount: " + totalAmount);
+        System.out.println("Date: " + dateString);
+    }
 }

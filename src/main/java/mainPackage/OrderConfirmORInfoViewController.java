@@ -56,7 +56,8 @@ public class OrderConfirmORInfoViewController implements Initializable {
 
         for (int i = 0; i< books.size(); i++)
         {
-            books.get(i).cartQuantity = Integer.min((int)books.get(i).cartQuantity, (int)books.get(i).quantity);
+            if(previous == "OrderMenu.fxml")
+                books.get(i).willingToPurchaseQuantity = Integer.min((int)books.get(i).willingToPurchaseQuantity, (int)books.get(i).quantity);
             books.get(i).print();
 
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("CartThumb.fxml"));
@@ -84,6 +85,9 @@ public class OrderConfirmORInfoViewController implements Initializable {
                 orderInfo.shippingCosts +
                 " = "+ (orderInfo.totalAmount + orderInfo.shippingCosts) +
                 " taka" );
+
+        if(previous.equals("ViewPreviousOrdersList.fxml"))
+            initializeForView();
     }
 
     @FXML
@@ -127,10 +131,8 @@ public class OrderConfirmORInfoViewController implements Initializable {
     public void initializeForView()
     {
         statusLabel.setText("Status: " + OrderInfo.statusToString(orderInfo.status));
-
         agreedCheckBox.setDisable(true);
         agreedCheckBox.setVisible(false);
-
         confirmButton.setVisible(false);
         confirmButton.setDisable(true);
     }

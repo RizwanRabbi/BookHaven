@@ -221,7 +221,7 @@ public class Database {
                 if(is != null) bookInfo.image = new Image(is);
                 bookInfo.pubDate = rs.getDate(9);
                 bookInfo.language = rs.getString(10);
-                bookInfo.cartQuantity = i.quantity;
+                bookInfo.willingToPurchaseQuantity = i.quantity;
                 arr.add(bookInfo);
                 bookInfo.print();
             }
@@ -332,7 +332,7 @@ public class Database {
             b.image = null;
             if(is != null) b.image = new Image(is);
             b.quantity = rs.getLong(5);
-            b.cartQuantity = rs.getLong(6);
+            b.willingToPurchaseQuantity = rs.getLong(6);
             b.ISBN = rs.getString(7);
 
 
@@ -473,8 +473,8 @@ public class Database {
             preparedStatement.setString(2, orderInfo.name);
             preparedStatement.setString(3, orderInfo.email);
             preparedStatement.setString(4, orderInfo.phoneNo);
-            Date today = new Date(System.currentTimeMillis());
-            preparedStatement.setDate(5, today);
+            Timestamp today = new Timestamp(System.currentTimeMillis());
+            preparedStatement.setTimestamp(5, today);
             preparedStatement.setInt(6, orderInfo.status);
             preparedStatement.setString(7, orderInfo.address);
             preparedStatement.setInt(8, orderInfo.shippingCosts);
@@ -489,7 +489,7 @@ public class Database {
     }
     public static ArrayList<OrderInfo> getOrdersByUserEmail(String userEmail) {
         ArrayList<OrderInfo> orders = new ArrayList<>();
-
+        System.out.println("Fetching orders for "+ userEmail);
         try (Connection connection = getConnection()) {
             // Modify the SQL query to order by date in descending order
             String selectQuery = "SELECT * FROM orders WHERE Email = ? ORDER BY orderDate DESC";
@@ -515,7 +515,8 @@ public class Database {
                 orderInfo.address = resultSet.getString("Address");
                 orderInfo.shippingCosts = resultSet.getInt("Shipping_costs");
                 orderInfo.totalAmount = resultSet.getInt("Total_amount");
-
+                System.out.println("Order Found");
+                orderInfo.print();
                 orders.add(orderInfo);
             }
         } catch (SQLException e) {
@@ -534,10 +535,48 @@ public class Database {
         {
             ptsd.setString(2, books.get(i).ISBN);
             ptsd.setInt(3, (int) books.get(i).price);
-            ptsd.setInt(4, (int) books.get(i).cartQuantity);
+            ptsd.setInt(4, (int) books.get(i).willingToPurchaseQuantity);
             ptsd.executeUpdate();
         }
     }
+    public static ArrayList<BookInfo> getOrderedBooks(int orderID) throws SQLException {
+        Connection conn = ConnectDB.getConnection();
+        PreparedStatement ptsd = conn.prepareStatement(
+                "SELECT " +
+                        "books.name, " +
+                        "books.author, " +
+                        "books.price, " +
+                        "books.cover, " +
+                        "books.quantity AS book_quantity, " +
+                        "orderbooks.quantity AS cart_quantity," +
+                        "books.isbn " +
+                        "FROM books " +
+                        "INNER JOIN orderbooks ON books.isbn = orderbooks.isbn " +
+                        "WHERE orderbooks.order_id = ?");
+        ptsd.setInt(1, orderID);
+
+        ResultSet rs = ptsd.executeQuery();
+        ArrayList<BookInfo> orderedBooks = new ArrayList<>();
+
+        while(rs.next())
+        {
+            BookInfo b = new BookInfo();
+            b.name = rs.getString(1);
+            b.author = rs.getString(2);
+            b.price = rs.getLong(3);
+            InputStream is = rs.getBinaryStream(4);
+            b.image = null;
+            if(is != null) b.image = new Image(is);
+            b.quantity = rs.getLong(5);
+            b.willingToPurchaseQuantity = rs.getLong(6);
+            b.ISBN = rs.getString(7);
+
+            orderedBooks.add(b);
+        }
+
+        return orderedBooks;
+    }
+
 
     public static void deleteUserCart() throws SQLException {
         Connection conn = ConnectDB.getConnection();

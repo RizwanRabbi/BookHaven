@@ -55,8 +55,9 @@ public class UserProfileController implements Initializable {
     }
 
     @FXML
-    void onOrderButtonClick(ActionEvent event) {
+    void onOrderButtonClick(ActionEvent event) throws IOException {
         //Views previous orders
+        SceneChanger.changeTo("ViewPreviousOrdersList.fxml", event);
     }
 
 

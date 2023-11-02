@@ -202,23 +202,45 @@ public class OrderMenuController implements Initializable {
         String address = addressField.getText();
         String phone = phoneField.getText();
 
-        if(address.isEmpty()) {
+        if(address.isEmpty() || allSpaces(address)) {
             errorLabel.setText("Please provide a valid address");
             return false;
         }
-        if(fname.isEmpty()) {
+        if(fname.isEmpty() || allSpaces(fname)) {
             errorLabel.setText("Please fill out First Name");
             return false;
         }
-        if(lname.isEmpty()) {
+        if(lname.isEmpty() || allSpaces(phone)) {
             errorLabel.setText("Please fill out Last Name");
             return false;
         }
-        if(phone.isEmpty()) {
+        if(phone.isEmpty() || notNumber(phone)) {
             errorLabel.setText("Please provide a Phone Number");
             return true;
         }
         return true;
+    }
+
+    private boolean allSpaces(String s)
+    {
+        if (s == null || s.isEmpty()) {
+            return false; // Return false for empty or null strings
+        }
+        for (int i=0; i<s.length(); i++)
+        {
+            if(s.charAt(i)!=' ')
+                return false;
+        }
+        return true;
+    }
+
+    private boolean notNumber(String s)
+    {
+        if (s == null || s.isEmpty()) {
+            return false; // Return false for empty or null strings
+        }
+
+        return s.matches("[0-9]+");
     }
 
     public void onSignUpButtonClicked(ActionEvent event) throws IOException {

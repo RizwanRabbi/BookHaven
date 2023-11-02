@@ -2,7 +2,6 @@ package mainPackage;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -10,9 +9,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 
 import java.io.IOException;
-import java.net.URL;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
 
 public class CartThumbController {
 
@@ -39,18 +36,18 @@ public class CartThumbController {
     private Button plusButton;
 
     void updateLabels() {
-        quantityLabel.setText(String.valueOf(book.cartQuantity));
+        quantityLabel.setText(String.valueOf(book.willingToPurchaseQuantity));
         priceLabel.setText("Price: " + book.price + " * "
-                + Long.min(book.cartQuantity, book.quantity)  + " = "
-                + book.price * Long.min(book.cartQuantity, book.quantity));
+                + Long.min(book.willingToPurchaseQuantity, book.quantity)  + " = "
+                + book.price * Long.min(book.willingToPurchaseQuantity, book.quantity));
     }
 
     @FXML
     void plusButtonClicked(ActionEvent event) throws SQLException, IOException {
-        book.cartQuantity = book.cartQuantity + 1;
+        book.willingToPurchaseQuantity = book.willingToPurchaseQuantity + 1;
 
         if(Main.email != null)
-            Database.updateCart(Main.email, book.ISBN, book.cartQuantity);
+            Database.updateCart(Main.email, book.ISBN, book.willingToPurchaseQuantity);
         else
             Main.tempCart.get(index).quantity++;
 
@@ -59,10 +56,10 @@ public class CartThumbController {
 
     @FXML
     void minusButtonClicked(ActionEvent event) throws SQLException, IOException {
-        book.cartQuantity = book.cartQuantity - 1;
+        book.willingToPurchaseQuantity = book.willingToPurchaseQuantity - 1;
 
         if(Main.email != null)
-            Database.updateCart(Main.email, book.ISBN, book.cartQuantity);
+            Database.updateCart(Main.email, book.ISBN, book.willingToPurchaseQuantity);
         else
             Main.tempCart.get(index).quantity--;
 
@@ -75,7 +72,7 @@ public class CartThumbController {
         stockLabel.setText("* "+ book.quantity +" in stock");
         imageBaksho.setImage(book.image);
         updateLabels();
-        if(book.cartQuantity <= 1)
+        if(book.willingToPurchaseQuantity <= 1)
             minusButton.setDisable(true);
 //        if(book.quantity == book.cartQuantity)
 //            plusButton.setDisable(true);

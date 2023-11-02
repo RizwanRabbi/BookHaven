@@ -33,7 +33,8 @@ public class UserInfo {
         System.out.println(fname + " "+ lname);
         System.out.println(phoneNo);
         System.out.println(address);
-        System.out.println(image);
+        if(image != null)
+            System.out.println("Image was found");
     }
 }
 
