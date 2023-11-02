@@ -400,3 +400,12 @@
 .cartThumb:hover {
     -fx-background-color: rgba(0, 91, 101, 0.09);
 }
+
+.checkbox>.box {
+    -fx-border-color: #000000;
+    -fx-border-width: 20;
+}
+
+.checkbox>.box>.mark {
+    -fx-background-color: green; /* Change checkmark color to green */
+}

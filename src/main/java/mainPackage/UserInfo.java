@@ -19,7 +19,9 @@ public class UserInfo {
         this.email = email;
         this.password = password;
 
-        // More work need to be done here to adjust user preferences when we create a user.
+        // TODO
+        //  More work need to be done here
+        //  To adjust user preferences when we create a user.
 
     }
 
@@ -37,5 +39,3 @@ public class UserInfo {
             System.out.println("Image was found");
     }
 }
-
-//
