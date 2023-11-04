@@ -202,7 +202,7 @@ public class OrderMenuController implements Initializable {
         String address = addressField.getText();
         String phone = phoneField.getText();
 
-        if(address.isEmpty() || allSpaces(address)) {
+        if(address.isEmpty() || allSpaces(address) || isNumber(address)) {
             errorLabel.setText("Please provide a valid address");
             return false;
         }
@@ -214,9 +214,13 @@ public class OrderMenuController implements Initializable {
             errorLabel.setText("Please fill out Last Name");
             return false;
         }
-        if(phone.isEmpty() || notNumber(phone)) {
+        if(phone.isEmpty()) {
             errorLabel.setText("Please provide a Phone Number");
-            return true;
+            return false;
+        }
+        if(!isNumber(phone))
+        {
+            errorLabel.setText("Phone Number must only contain digits");
         }
         return true;
     }
@@ -234,14 +238,13 @@ public class OrderMenuController implements Initializable {
         return true;
     }
 
-    private boolean notNumber(String s)
-    {
+    private boolean isNumber(String s) {
         if (s == null || s.isEmpty()) {
             return false; // Return false for empty or null strings
         }
-
-        return s.matches("[0-9]+");
+        return s.matches("^[0-9]+$");
     }
+
 
     public void onSignUpButtonClicked(ActionEvent event) throws IOException {
         collectUserDataFields();
@@ -267,5 +270,4 @@ public class OrderMenuController implements Initializable {
             errorLabel.setText("UserInfo Has been saved");
         }
     }
-
 }

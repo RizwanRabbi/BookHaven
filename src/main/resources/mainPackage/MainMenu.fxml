@@ -47,6 +47,14 @@
                         <Font size="18.0" />
                     </font>
                 </Button>
+            <Button mnemonicParsing="false" onAction="#orderSearch" prefHeight="42.0" prefWidth="182.0" text="Search Order">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </Button>
                 <Button mnemonicParsing="false" onAction="#onExitButtonClick" prefHeight="42.0" prefWidth="182.0" styleClass="exitButton" text="Home">
                     <font>
                         <Font size="18.0" />

@@ -26,4 +26,9 @@ public class MainMenuController {
         SceneChanger.changeTo("UserDashboard.fxml", event);
     }
 
+
+    @FXML
+    void orderSearch(ActionEvent event) throws IOException {
+        SceneChanger.changeTo("OrderSearch.fxml", event);
+    }
 }

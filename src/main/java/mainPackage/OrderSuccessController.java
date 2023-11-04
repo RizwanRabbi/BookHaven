@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
@@ -16,12 +17,12 @@ public class OrderSuccessController implements Initializable {
     @FXML
     private Text infoText;
     @FXML
-    private Label orderIDLabel;
+    private TextArea orderIDLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        orderIDLabel.setText("Your Order ID : " + orderInfo.orderID);
+        orderIDLabel.setText(String.valueOf(orderInfo.orderID));
 
         if(Main.email == null)
         {

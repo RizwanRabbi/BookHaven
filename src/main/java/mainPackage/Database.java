@@ -1,6 +1,7 @@
 package mainPackage;
 
 import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
 import java.io.*;
 import java.sql.*;
@@ -8,7 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static mainPackage.ConnectDB.getConnection;
-import java.sql.Date;
+
 public class Database {
 
     public static String hash(String s)
@@ -584,5 +585,38 @@ public class Database {
         ptsd.setString(1, Main.email);
         ptsd.executeUpdate();
     }
+
+    public static OrderInfo searchOrder (int orderID, String phoneNo) throws SQLException {
+        OrderInfo o = null;
+
+        Connection c = ConnectDB.getConnection();
+        PreparedStatement ptsd = c.prepareStatement("SELECT * FROM ORDERS WHERE ORDER_ID = ? AND MOBILE_NO = ?");
+        ptsd.setInt(1, orderID);
+        ptsd.setString(2, phoneNo);
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        ResultSet rs = ptsd.executeQuery();
+        while (rs.next())
+        {
+            o = new OrderInfo();
+            o.orderID = rs.getInt("Order_ID");
+            o.name = rs.getString("Name");
+            o.email = rs.getString("Email");
+            o.phoneNo = rs.getString("Mobile_No");
+
+            // Format the orderDate field to "dd/MM/yyyy"
+            java.sql.Date sqlDate = rs.getDate("orderDate");
+            o.dateString = dateFormat.format(sqlDate);
+
+            o.status = rs.getInt("Status");
+            o.address = rs.getString("Address");
+            o.shippingCosts = rs.getInt("Shipping_costs");
+            o.totalAmount = rs.getInt("Total_amount");
+            System.out.println("Order Found");
+            o.print();
+        }
+        return o;
+    }
+
 }
 

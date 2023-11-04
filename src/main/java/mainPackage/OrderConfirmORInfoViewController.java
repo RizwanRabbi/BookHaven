@@ -19,6 +19,7 @@ import java.util.ResourceBundle;
 
 public class OrderConfirmORInfoViewController implements Initializable {
 
+
     public static String previous;
     public static OrderInfo orderInfo;
     public static ArrayList<BookInfo> books;
@@ -86,7 +87,8 @@ public class OrderConfirmORInfoViewController implements Initializable {
                 " = "+ (orderInfo.totalAmount + orderInfo.shippingCosts) +
                 " taka" );
 
-        if(previous.equals("ViewPreviousOrdersList.fxml"))
+        if(previous.equals("ViewPreviousOrdersList.fxml" )
+                || previous.equals("OrderSearch.fxml"))
             initializeForView();
     }
 
