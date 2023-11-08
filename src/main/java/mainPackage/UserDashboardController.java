@@ -173,7 +173,7 @@ public class UserDashboardController implements Initializable {
 
     @FXML
     void onRemoveButtonClick(ActionEvent event) throws SQLException, IOException {
-        ArrayList<BookInfo> bookInfos = Database.getAllBooks();
+        bookInfos = Database.getAllBooks();
         displayBooks(bookInfos);
         searchBar.clear();
         removeButton.setDisable(true);
