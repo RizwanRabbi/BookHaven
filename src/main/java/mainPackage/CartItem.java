@@ -8,9 +8,9 @@ public class CartItem {
     String ISBN;
     int quantity;
 
-    CartItem (String isbn, int Quantity)
+    CartItem (String Isbn, int Quantity)
     {
-        ISBN = isbn;
+        ISBN = Isbn;
         quantity = Quantity;
     }
 

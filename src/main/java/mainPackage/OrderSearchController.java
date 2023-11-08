@@ -2,13 +2,16 @@ package mainPackage;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
-public class OrderSearchController {
+public class OrderSearchController implements Initializable {
 
     @FXML
     private Label errorLabel;
@@ -78,4 +81,21 @@ public class OrderSearchController {
     }
 
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        // Only Allows Number Input
+
+        phoneField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                phoneField.setText(oldValue);
+            }
+        });
+
+        orderIDField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                phoneField.setText(oldValue);
+            }
+        });
+    }
 }

@@ -108,6 +108,12 @@ public class UserProfileEditController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        phoneField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                // If the new input doesn't match the pattern (non-digit), set the text to the previous value
+                phoneField.setText(oldValue);
+            }
+        });
         fnameField.setText(Main.userInfo.fname);
         lnameField.setText(Main.userInfo.lname);
         addressField.setText(Main.userInfo.address);

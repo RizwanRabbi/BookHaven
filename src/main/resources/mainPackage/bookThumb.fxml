@@ -12,9 +12,9 @@
 
 <VBox fx:id="backVB" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onThumbClick" prefHeight="371.0" prefWidth="241.0" styleClass="bookThumb" stylesheets="@bookThumb.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainPackage.BookThumbController">
    <children>
-      <HBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="220.0" prefWidth="243.0" VBox.vgrow="ALWAYS">
+      <HBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#onThumbClick" prefHeight="220.0" prefWidth="243.0" VBox.vgrow="ALWAYS">
          <children>
-            <ImageView fx:id="bookImage" fitHeight="221.0" fitWidth="191.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
+            <ImageView fx:id="bookImage" fitHeight="221.0" fitWidth="191.0" onMouseClicked="#onThumbClick" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
                <viewport>
                   <Rectangle2D />
                </viewport>

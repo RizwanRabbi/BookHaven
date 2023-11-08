@@ -180,7 +180,16 @@ public class Database {
     public static ArrayList<BookInfo> getAllBooks() throws SQLException {
         ArrayList<BookInfo> arr = new ArrayList<>();
         Connection conn = getConnection();
-        PreparedStatement pstmt = conn.prepareStatement("select * from books");
+        String query = "SELECT * " +
+                "FROM ( " +
+                "    SELECT * " +
+                "    FROM books " +
+                "    ORDER BY DBMS_RANDOM.VALUE " +
+                ") " +
+                "WHERE ROWNUM <= 30";
+
+        PreparedStatement pstmt = conn.prepareStatement(query);
+
         ResultSet rs = pstmt.executeQuery();
         while (rs.next()) {
             BookInfo bookInfo = new BookInfo();
@@ -323,41 +332,26 @@ public class Database {
                 "from books, cart where books.isbn = cart.isbn and cart.email = ?");
         ptsd.setString(1,email);
         ResultSet rs = ptsd.executeQuery();
-        while(rs.next())
-        {
-            BookInfo b = new BookInfo();
-            b.name = rs.getString(1);
-            b.author = rs.getString(2);
-            b.price = rs.getLong(3);
-            InputStream is = rs.getBinaryStream(4);
-            b.image = null;
-            if(is != null) b.image = new Image(is);
-            b.quantity = rs.getLong(5);
-            b.willingToPurchaseQuantity = rs.getLong(6);
-            b.ISBN = rs.getString(7);
 
-
-            books.add(b);
+        while (rs.next()) {
+            books.add(getBookInfoFromRS(rs));
         }
 
         return books;
     }
-    public static void emptyCart(String email) throws SQLException {
-        Connection conn= getConnection();
-        PreparedStatement ptsd= conn.prepareStatement("delete from cart where email = ?");
-        ptsd.setString(1,email);
+    public static int getQuantityFromCart(String email, String isbn) throws SQLException {
 
+        Connection conn = getConnection();
+        PreparedStatement pstmt = conn.prepareStatement("select quantity from cart where email = ? and isbn = ?");
+        pstmt.setString(1,email);
+        pstmt.setString(2,isbn);
+        ResultSet rs = pstmt.executeQuery();
 
-        try{
-            ptsd.executeUpdate();
-        }
-        catch (SQLException e)
-        {
-            System.out.println("\n\nError in Deleting whole cart :" );
-            e.printStackTrace();
-        }
+        while (rs.next())
+            return rs.getInt(1);
+
+        return 1;
     }
-
     public static int numberOfItemsInCart(String email) throws SQLException {
         Connection conn = getConnection();
         PreparedStatement pstmt = conn.prepareStatement("select count(isbn) from cart where email = ?");
@@ -616,6 +610,17 @@ public class Database {
             o.print();
         }
         return o;
+    }
+
+    public static BookInfo getBookGivenISBN(String isbn) throws SQLException {
+        Connection conn = ConnectDB.getConnection();
+        BookInfo b = null ;
+        PreparedStatement ptsd = conn.prepareStatement( "SELECT * FROM books where ISBN = ?");
+        ptsd.setString(1, isbn);
+        ResultSet rs = ptsd.executeQuery();
+        while (rs.next())
+            b = getBookInfoFromRS(rs);
+        return b;
     }
 
 }

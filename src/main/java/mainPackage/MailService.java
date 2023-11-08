@@ -72,5 +72,13 @@ public class MailService {
             return false;
         }
     }
+
+    /*
+    *
+    * TODO Might add this to OTP to make it like the TorrentBD OTP Code
+    <div style="margin-top:25px;text-align:center">
+        <div style="border:1px solid teal;text-align:center;font-size:1.2em;color:teal;border-radius:3px;display:inline-block;padding:3px 30px">364FE1055D</div>
+    </div>
+    * */
 }
 

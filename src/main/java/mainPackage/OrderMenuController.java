@@ -56,6 +56,13 @@ public class OrderMenuController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        // Phonefield only acceapts number as input
+        phoneField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                // If the new input doesn't match the pattern (non-digit), set the text to the previous value
+                phoneField.setText(oldValue);
+            }
+        });
         errorLabel.setText(""); // No errors at the beginning
 
         /*

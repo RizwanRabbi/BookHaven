@@ -10,6 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Objects;
 
@@ -76,8 +77,10 @@ public class BookThumbController {
         addCartButton.setDisable(true);
     }
     @FXML
-    void onThumbClick(MouseEvent event) {
+    void onThumbClick(MouseEvent event) throws IOException {
         System.out.println("Click Click " + isbn);
+        BookViewController.isbn = isbn;
+        SceneChanger.changeTo("BookView.fxml", backVB);
     }
 
 }

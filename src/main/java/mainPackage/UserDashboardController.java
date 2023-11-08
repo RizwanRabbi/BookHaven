@@ -39,11 +39,12 @@ public class UserDashboardController implements Initializable {
     @FXML
     private TextField searchBar;
 
+    private static String searchQuery;
     @FXML
     private Button searchButton;
     @FXML
     public Label numberOfItems;
-    ArrayList<BookInfo> bookInfos;
+    private static ArrayList<BookInfo> bookInfos;
     private boolean findInCartArray(BookInfo bookInfo) {
         for(CartItem cartItem : Main.tempCart) {
             if(cartItem.ISBN.equals(bookInfo.ISBN))
@@ -55,7 +56,14 @@ public class UserDashboardController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         removeButton.setDisable(true);
         try {
-            bookInfos = Database.getAllBooks();
+            if(bookInfos == null)
+                bookInfos = Database.getAllBooks();
+            if(searchQuery != null && !searchQuery.isEmpty())
+            {
+                removeButton.setDisable(false);
+                searchBar.setText(searchQuery);
+            }
+
             displayBooks(bookInfos);
 
             if(Main.email != null)
@@ -147,6 +155,7 @@ public class UserDashboardController implements Initializable {
     }
     @FXML
     void onSearchButtonClick(ActionEvent event) throws SQLException, IOException {
+        searchQuery = searchBar.getText();
         onAnythingTyped();
     }
     @FXML
@@ -161,11 +170,13 @@ public class UserDashboardController implements Initializable {
             displayBooks(bookInfos);
         }
     }
+
     @FXML
     void onRemoveButtonClick(ActionEvent event) throws SQLException, IOException {
         ArrayList<BookInfo> bookInfos = Database.getAllBooks();
         displayBooks(bookInfos);
         searchBar.clear();
         removeButton.setDisable(true);
+        searchQuery = null;
     }
 }

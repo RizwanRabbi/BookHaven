@@ -55,11 +55,6 @@ public class CartController implements Initializable {
     }
 
     @FXML
-    void onCartIconClick(MouseEvent event) {
-        // Do Nothing cause already here HAHAHAHA
-    }
-
-    @FXML
     void onProfileImageClick(MouseEvent event) throws IOException {
         System.out.println("Profile");
         if(Main.email == null){
