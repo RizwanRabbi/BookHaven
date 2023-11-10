@@ -333,8 +333,19 @@ public class Database {
         ptsd.setString(1,email);
         ResultSet rs = ptsd.executeQuery();
 
-        while (rs.next()) {
-            books.add(getBookInfoFromRS(rs));
+        while(rs.next())
+        {
+            BookInfo b = new BookInfo();
+            b.name = rs.getString(1);
+            b.author = rs.getString(2);
+            b.price = rs.getLong(3);
+            InputStream is = rs.getBinaryStream(4);
+            b.image = null;
+            if(is != null) b.image = new Image(is);
+            b.quantity = rs.getLong(5);
+            b.willingToPurchaseQuantity = rs.getLong(6);
+            b.ISBN = rs.getString(7);
+            books.add(b);
         }
 
         return books;
