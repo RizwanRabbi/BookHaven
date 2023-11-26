@@ -45,7 +45,7 @@ public class BookViewController implements Initializable {
         priceField.setText("Price : "+book.price);
         stockLabel.setText(book.quantity + " copies available");
         descriptionField.setText(book.description);
-        genreFIeld.setText("Genre : " +book.getGenresOfBook());
+        genreField.setText("Genre : " +book.getGenresOfBook());
         isbnField.setText("ISBN : " + book.ISBN);
 
         // Book Image
@@ -214,7 +214,7 @@ public class BookViewController implements Initializable {
     private HBox cartIcon;
 
     @FXML
-    private Text genreFIeld;
+    private Text genreField;
 
     @FXML
     private TextField isbnField;

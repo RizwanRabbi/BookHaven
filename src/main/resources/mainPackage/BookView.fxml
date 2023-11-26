@@ -169,7 +169,7 @@
                         <Insets />
                      </VBox.margin>
                   </TextArea>
-                  <Text fx:id="genreFIeld" nodeOrientation="LEFT_TO_RIGHT" stroke="WHITE" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeType="OUTSIDE" strokeWidth="0.0" text="Genre :" textAlignment="LEFT" wrappingWidth="832.6432800292969">
+                  <Text fx:id="genreField" nodeOrientation="LEFT_TO_RIGHT" stroke="WHITE" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeType="OUTSIDE" strokeWidth="0.0" text="Genre :" textAlignment="LEFT" wrappingWidth="832.6432800292969">
                      <font>
                         <Font size="20.0" />
                      </font>

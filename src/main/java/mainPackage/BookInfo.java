@@ -2,12 +2,15 @@ package mainPackage;
 
 import javafx.scene.image.Image;
 
+import java.util.ArrayList;
+import java.util.StringJoiner;
+
 public class BookInfo {
     public String ISBN;
     public String name;
     public String author;
     public String description;
-    public String genre;
+    public String genreBitStr;
 
     public long price;
     public long quantity;
@@ -26,7 +29,7 @@ public class BookInfo {
         System.out.println("Name: " + name);
         System.out.println("Author: " + author);
         System.out.println("Description: " + description);
-        System.out.println("Genre: " + genre);
+        System.out.println("Genre: " + genreBitStr);
         System.out.println("Price: " + price);
         System.out.println("Quantity: " + quantity);
         System.out.println("Cart Quantity: " + willingToPurchaseQuantity);
@@ -37,9 +40,21 @@ public class BookInfo {
 
     public String getGenresOfBook()
     {
-        // TODO implement a function that returns the string of all the genre
-        //  That matches the book
+        System.out.println("Retrieving genres -> ");
+        System.out.println("Bit String : " +genreBitStr);
 
-        return "";
+        ArrayList<String> genreList = Database.getGenre(genreBitStr);
+
+        // Using StringJoiner for better string concatenation
+        StringJoiner finalStrJoiner = new StringJoiner(", ");
+
+        for (String genre : genreList) {
+            finalStrJoiner.add(genre);
+        }
+
+        String finalStr = finalStrJoiner.toString();
+        System.out.println("Retrieved Genres" +finalStr);
+
+        return finalStr;
     }
 }

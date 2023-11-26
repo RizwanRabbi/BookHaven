@@ -58,7 +58,8 @@ public class ViewPreviousOrderListController implements Initializable {
 
     @FXML
     void onProfileImageClick(MouseEvent event) throws IOException {
-        SceneChanger.changeTo("UserProfile.fxml", vb);
+//        UserProfileController.returnTo = "ViewPreviousOrdersList.fxml";
+//        SceneChanger.changeTo("UserProfile.fxml", vb);
     }
 
     @FXML

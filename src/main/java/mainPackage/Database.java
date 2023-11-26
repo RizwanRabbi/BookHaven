@@ -1,7 +1,6 @@
 package mainPackage;
 
 import javafx.scene.image.Image;
-import javafx.stage.Stage;
 
 import java.io.*;
 import java.sql.*;
@@ -197,7 +196,7 @@ public class Database {
             bookInfo.name = rs.getString(2);
             bookInfo.author = rs.getString(3);
             bookInfo.description = rs.getString(4);
-            bookInfo.genre = rs.getString(5);
+            bookInfo.genreBitStr = rs.getString(5);
             bookInfo.price = rs.getLong(6);
             bookInfo.quantity = rs.getLong(7);
             InputStream is = rs.getBinaryStream(8);
@@ -223,7 +222,7 @@ public class Database {
                 bookInfo.name = rs.getString(2);
                 bookInfo.author = rs.getString(3);
                 bookInfo.description = rs.getString(4);
-                bookInfo.genre = rs.getString(5);
+                bookInfo.genreBitStr = rs.getString(5);
                 bookInfo.price = rs.getLong(6);
                 bookInfo.quantity = rs.getLong(7);
                 InputStream is = rs.getBinaryStream(8);
@@ -380,7 +379,7 @@ public class Database {
         bookInfo.name = rs.getString(2);
         bookInfo.author = rs.getString(3);
         bookInfo.description = rs.getString(4);
-        bookInfo.genre = rs.getString(5);
+        bookInfo.genreBitStr = rs.getString(5);
         bookInfo.price = rs.getLong(6);
         bookInfo.quantity = rs.getLong(7);
         InputStream is = rs.getBinaryStream(8);
@@ -417,13 +416,14 @@ public class Database {
     }
     public static ArrayList<BookInfo> searchBooksByWordSequence(ArrayList<String> a) throws SQLException {
         Connection conn = getConnection();
-        PreparedStatement preparedStatement = conn.prepareStatement("select * from books where LOWER(name) like ? or LOWER(author) like ?");
+        PreparedStatement preparedStatement = conn.prepareStatement("select * from books where LOWER(name) like ? or LOWER(author) like ? or ISBN like ?");
         String src = "%";
         for(String words: a) {
             src += words + "%";
         }
         preparedStatement.setString(1, src);
         preparedStatement.setString(2, src);
+        preparedStatement.setString(3, src);
         ResultSet rs = preparedStatement.executeQuery();
         ArrayList<BookInfo> bookInfos = new ArrayList<>();
         while (rs.next()) {
@@ -633,6 +633,48 @@ public class Database {
             b = getBookInfoFromRS(rs);
         return b;
     }
+
+    public static ArrayList<String> getGenre(String genreBitStr) {
+
+        Connection conn = ConnectDB.getConnection();
+        ArrayList<String> matchingGenres = new ArrayList<>();
+
+        String allGenresQuery = "SELECT GENRE_NAME FROM GENRE ORDER BY GENRE_NO ASC";
+
+        try (PreparedStatement ptsd = conn.prepareStatement(allGenresQuery)) {
+            try (ResultSet rs = ptsd.executeQuery()) {
+
+                ArrayList<String> allGenres = new ArrayList<>(); // ArrayList that Store all genres
+
+                while (rs.next()) {
+                    String genreName = rs.getString("GENRE_NAME");
+                    allGenres.add(genreName);
+                }
+
+                for (int i = 0; i < genreBitStr.length() && i < allGenres.size(); i++) {
+                    if (genreBitStr.charAt(i) == '1') {
+                        matchingGenres.add(allGenres.get(i).toUpperCase());
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Close the connection in a finally block to ensure it gets closed
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return matchingGenres;
+    }
+
+
+
 
 }
 
