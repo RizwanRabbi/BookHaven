@@ -148,7 +148,7 @@
                         </TextField>
                      </children>
                   </HBox>
-                  <TextField fx:id="authorField" alignment="TOP_LEFT" styleClass="selectableText" text="Author">
+                  <TextField fx:id="authorField" alignment="TOP_LEFT" editable="false" styleClass="selectableText" text="Author">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -156,7 +156,7 @@
                         <Insets right="30.0" />
                      </VBox.margin>
                   </TextField>
-                  <TextField fx:id="priceField" alignment="TOP_LEFT" styleClass="selectableText" text="Price">
+                  <TextField fx:id="priceField" alignment="TOP_LEFT" editable="false" styleClass="selectableText" text="Price">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -177,7 +177,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
                   </Text>
-                  <TextField fx:id="isbnField" alignment="TOP_LEFT" styleClass="selectableText" text="ISBN">
+                  <TextField fx:id="isbnField" alignment="TOP_LEFT" editable="false" styleClass="selectableText" text="ISBN">
                      <font>
                         <Font size="20.0" />
                      </font>
