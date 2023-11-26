@@ -417,13 +417,14 @@ public class Database {
     }
     public static ArrayList<BookInfo> searchBooksByWordSequence(ArrayList<String> a) throws SQLException {
         Connection conn = getConnection();
-        PreparedStatement preparedStatement = conn.prepareStatement("select * from books where LOWER(name) like ? or LOWER(author) like ?");
+        PreparedStatement preparedStatement = conn.prepareStatement("select * from books where LOWER(name) like ? or LOWER(author) like ? or ISBN like ?");
         String src = "%";
         for(String words: a) {
             src += words + "%";
         }
         preparedStatement.setString(1, src);
         preparedStatement.setString(2, src);
+        preparedStatement.setString(3, src);
         ResultSet rs = preparedStatement.executeQuery();
         ArrayList<BookInfo> bookInfos = new ArrayList<>();
         while (rs.next()) {
