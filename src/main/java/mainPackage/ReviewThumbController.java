@@ -47,7 +47,7 @@ public class ReviewThumbController implements Initializable {
 
     @FXML
     void onRatingClicked(MouseEvent event) {
-
+        saveButton.setDisable(false);
     }
 
     @Override
