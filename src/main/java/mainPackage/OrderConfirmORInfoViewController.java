@@ -73,6 +73,13 @@ public class OrderConfirmORInfoViewController implements Initializable {
             c.index = i;
             c.initialize();
             c.initializeForViewing();
+            try {
+                if((previous.equals("ViewPreviousOrdersList.fxml" ) || previous.equals("OrderSearch.fxml"))
+                    && Database.boughtTheBook(c.book))
+                    c.addReview.setVisible(true);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
             int x = 20 , y = 2*i+3;
             gridoPain.add(root, x, y);
         }
@@ -132,10 +139,12 @@ public class OrderConfirmORInfoViewController implements Initializable {
 
     public void initializeForView()
     {
+        ReviewThumbController.returnTo = "OrderConfirmORInfoView.fxml";
         statusLabel.setText("Status: " + OrderInfo.statusToString(orderInfo.status));
         agreedCheckBox.setDisable(true);
         agreedCheckBox.setVisible(false);
         confirmButton.setVisible(false);
         confirmButton.setDisable(true);
+        addressField.setEditable(false);
     }
 }

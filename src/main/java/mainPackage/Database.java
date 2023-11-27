@@ -1,8 +1,12 @@
 package mainPackage;
 
 import javafx.scene.image.Image;
+import javafx.util.Pair;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -673,8 +677,73 @@ public class Database {
         return matchingGenres;
     }
 
+    public static boolean boughtTheBook(BookInfo bookInfo) throws SQLException {
+        if(Main.email == null) return false;
+        Connection conn = ConnectDB.getConnection();
+        PreparedStatement pstmt = conn.prepareStatement("select orderbooks.isbn, orders.status, orders.email\n" +
+                "from orderbooks, orders\n" +
+                "where orders.order_id = orderbooks.order_id AND orders.status = 3 and orders.email = ? and orderbooks.isbn = ?");
+        pstmt.setString(1, Main.email);
+        pstmt.setString(2,bookInfo.ISBN);
+        ResultSet rs = pstmt.executeQuery();
+        if(rs.next())
+            return true;
+        return false;
+    }
+    public static boolean hasReviewed(BookInfo bookInfo) throws SQLException {
+        Connection conn = ConnectDB.getConnection();
+        PreparedStatement pstmt = conn.prepareStatement("select *\n" +
+                "from reviews\n" +
+                "where email = ? and isbn = ?");
+        pstmt.setString(1,Main.email);
+        pstmt.setString(2,bookInfo.ISBN);
+        ResultSet rs = pstmt.executeQuery();
+        if(rs.next())
+            return true;
+        return false;
+    }
+    public static void addReview(String text, double rating, BookInfo bookInfo) throws SQLException {
+        Connection conn = ConnectDB.getConnection();
+        PreparedStatement pstmt = conn.prepareStatement("insert into reviews VALUES(?, ?, ?, ?)");
+        pstmt.setString(1, Main.email);
+        pstmt.setString(2, bookInfo.ISBN);
+        pstmt.setString(3, text);
+        pstmt.setDouble(4,rating);
+        pstmt.executeUpdate();
+    }
+    public static void updateReview(String text, double rating, BookInfo bookInfo) throws SQLException {
+        Connection conn = ConnectDB.getConnection();
+        PreparedStatement pstmt = conn.prepareStatement("update reviews\n" +
+                "set text = ?, rating = ?\n" +
+                "where email = ? and isbn = ?");
+        pstmt.setString(1, text);
+        pstmt.setDouble(2,rating);
+        pstmt.setString(3, Main.email);
+        pstmt.setString(4, bookInfo.ISBN);
+        pstmt.executeUpdate();
+    }
+    public static Pair<String, Double> getReview(BookInfo bookInfo) throws SQLException {
+        Connection conn = ConnectDB.getConnection();
+        PreparedStatement pstmt = conn.prepareStatement("select text, rating from reviews where email = ? and isbn = ?");
+        pstmt.setString(1, Main.email);
+        pstmt.setString(2, bookInfo.ISBN);
+        ResultSet rs = pstmt.executeQuery();
+        while (rs.next()) {
+            return new Pair<>(rs.getString(1), rs.getDouble(2));
+        }
+        return null;
+    }
 
-
-
+    public static ArrayList<Pair<Pair<String,String>, Double>> getAllReviews(BookInfo bookInfo) throws SQLException {
+        Connection conn = ConnectDB.getConnection();
+        ArrayList<Pair<Pair<String,String>, Double>> arrayList = new ArrayList<>();
+        PreparedStatement pstmt = conn.prepareStatement("select text, rating, email from reviews where isbn = ?");
+        pstmt.setString(1, bookInfo.ISBN);
+        ResultSet rs = pstmt.executeQuery();
+        while(rs.next()) {
+            arrayList.add(new Pair<>(new Pair<>(rs.getString(1), rs.getString(3)), rs.getDouble(2)));
+        }
+        return arrayList;
+    }
 }
 

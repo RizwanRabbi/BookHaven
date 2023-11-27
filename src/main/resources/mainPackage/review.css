@@ -31,20 +31,20 @@
     -fx-alignment: center;
 }
 
-.button {
+.post-button {
     -fx-background-color: #005b65;
     -fx-text-fill: #ffffff;
     -fx-font-size: 15px;
     -fx-background-radius: 20;
 }
-.button:hover {
+.post-button:hover {
     -fx-background-color: #003741;
     -fx-text-fill: #ffffff;
     -fx-font-size: 18px;
     -fx-background-radius: 20;
     -fx-cursor: clickable;
 }
-.button:pressed {
+.post-button:pressed {
     -fx-background-color: #001E21;
     -fx-text-fill: #ffffff;
     -fx-background-radius: 20;
@@ -180,14 +180,14 @@
     -fx-background-radius: 40;
 }
 
-#backIcon {
+.backIcon {
     /*-fx-graphic: url("img.png");*/
     -fx-background-image: url("GoBack.png") ;
     -fx-background-size: cover;
-    /*-fx-background-color: #007286;*/
+    -fx-background-color: rgba(0, 114, 134, 0);
     /*-fx-background-position: center;*/
 }
-#backIcon:hover {
+.backIcon:hover {
     -fx-background-image: url("GoBackHover.png");
     /*-fx-background-position: center;*/
     -fx-background-size: cover;
@@ -293,6 +293,17 @@
 
 .borderless-text-area {
     -fx-font-size: 19;
+    -fx-text-fill: black;
+    -fx-control-inner-background: transparent;
+    -fx-prompt-text-fill: rgba(0, 0, 0, 0.5);
+    /*-fx-control-inner-background: rgba(215, 248, 240, 0.5);*/
+    -fx-border-radius: 20;
+    -fx-padding: 5px;
+    -fx-background-color: transparent;
+    -fx-border-color: #005b65;
+}
+.comment-text-area {
+    -fx-font-size: 14;
     -fx-text-fill: black;
     -fx-control-inner-background: transparent;
     -fx-prompt-text-fill: rgba(0, 0, 0, 0.5);

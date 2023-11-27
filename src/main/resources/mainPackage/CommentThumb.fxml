@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import org.controlsfx.control.Rating?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="170.0" prefWidth="823.0" style="-fx-border-color: #004e59; -fx-border-radius: 20;" stylesheets="@review.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainPackage.CommentThumbController">
+   <children>
+      <HBox alignment="CENTER" prefHeight="98.0" prefWidth="842.0">
+         <children>
+            <Text fx:id="name" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" wrappingWidth="314.9366645812988">
+               <font>
+                  <Font name="System Bold Italic" size="25.0" />
+               </font>
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rating:" textAlignment="RIGHT" wrappingWidth="286.93664598464966">
+               <font>
+                  <Font name="System Italic" size="20.0" />
+               </font>
+            </Text>
+            <VBox alignment="TOP_RIGHT" prefHeight="54.0" prefWidth="509.0">
+               <children>
+                  <Rating fx:id="rating">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Rating>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <TextArea fx:id="reviewText" editable="false" prefHeight="203.0" prefWidth="842.0" styleClass="borderlessTextArea" text="This is a very nice book&#10;" />
+   </children>
+</VBox>

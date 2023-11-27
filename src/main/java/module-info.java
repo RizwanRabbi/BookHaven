@@ -6,6 +6,7 @@ module com.example.demo {
     requires java.mail;
     requires junit;
     requires java.net.http;
+    requires org.controlsfx.controls;
     opens mainPackage to javafx.fxml;
     exports mainPackage;
 }

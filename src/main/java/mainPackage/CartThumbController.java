@@ -17,6 +17,8 @@ public class CartThumbController {
     public int index;
 
     @FXML
+    public Button addReview;
+    @FXML
     private HBox deletIcon;
     @FXML
     private Label authorLabel;
@@ -95,5 +97,10 @@ public class CartThumbController {
         minusButton.setDisable(true);
         plusButton.setDisable(true);
 
+    }
+    @FXML
+    void onAddReviewClick(ActionEvent event) throws IOException {
+        ReviewThumbController.bookInfo = book;
+        SceneChanger.changeTo("ReviewThumb.fxml", event);
     }
 }

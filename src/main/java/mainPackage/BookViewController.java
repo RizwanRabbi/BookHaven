@@ -1,4 +1,5 @@
 package mainPackage;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,10 +12,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import javafx.util.Pair;
+import org.controlsfx.control.Rating;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class BookViewController implements Initializable {
@@ -45,8 +49,16 @@ public class BookViewController implements Initializable {
         priceField.setText("Price : "+book.price);
         stockLabel.setText(book.quantity + " copies available");
         descriptionField.setText(book.description);
-        genreField.setText("Genre : " +book.getGenresOfBook());
+        genreFIeld.setText("Genre : " +book.getGenresOfBook());
         isbnField.setText("ISBN : " + book.ISBN);
+        try {
+            Double r = getRating();
+            System.out.println(r);
+            if(r < 1) rating.setVisible(false);
+            else rating.setRating(getRating());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         // Book Image
 
@@ -95,6 +107,15 @@ public class BookViewController implements Initializable {
 
 
     }
+    private double getRating() throws SQLException {
+        ArrayList<Pair<Pair<String, String>, Double >> arrayList = Database.getAllReviews(book);
+        if(arrayList.size() == 0) return 0;
+        double r = 0;
+        for(Pair<Pair<String, String>, Double > p : arrayList)
+            r += p.getValue();
+        r /= arrayList.size();
+        return r;
+    }
     @FXML
     void minusButtonClicked(ActionEvent ignoredEvent) throws SQLException {
         book.willingToPurchaseQuantity = book.willingToPurchaseQuantity - 1;
@@ -120,7 +141,7 @@ public class BookViewController implements Initializable {
 
         quantityLabel.setText(String.valueOf(book.willingToPurchaseQuantity));
 
-        // Store Info in cart Cart
+        // Store Info in cart
         if(Main.email != null)
             Database.updateCart(Main.email, book.ISBN, book.willingToPurchaseQuantity);
         else
@@ -192,15 +213,19 @@ public class BookViewController implements Initializable {
     }
 
     @FXML
-    void reviewButtonClicked(ActionEvent event) {
-        System.out.println("Review");
+    void reviewButtonClicked(ActionEvent event) throws IOException {
+        ReviewBookController.bookInfo = book;
+        SceneChanger.changeTo("ReviewBook.fxml", event);
     }
 
     public static BookInfo book;
 
     private int indx = -1;
 
+
     private int numberItemsInCart;
+    @FXML
+    private Rating rating;
     @FXML
     private Button addCartButton;
 
@@ -214,7 +239,7 @@ public class BookViewController implements Initializable {
     private HBox cartIcon;
 
     @FXML
-    private Text genreField;
+    private Text genreFIeld;
 
     @FXML
     private TextField isbnField;
