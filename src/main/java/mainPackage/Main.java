@@ -30,6 +30,7 @@ public class Main extends Application {
     }
 
     public static void run(String[] args) {
+        System.setProperty("prism.allowhidpi", "true");
         launch();
     }
 

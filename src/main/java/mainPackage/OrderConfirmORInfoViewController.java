@@ -54,7 +54,14 @@ public class OrderConfirmORInfoViewController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         confirmButton.setDisable(true);
-
+        for(int i = 0; i < books.size(); i++)
+        {
+            if(books.get(i).quantity == 0)
+            {
+                books.remove(i);
+                i--;
+            }
+        }
         for (int i = 0; i< books.size(); i++)
         {
             if(previous == "OrderMenu.fxml")
@@ -93,7 +100,6 @@ public class OrderConfirmORInfoViewController implements Initializable {
                 orderInfo.shippingCosts +
                 " = "+ (orderInfo.totalAmount + orderInfo.shippingCosts) +
                 " taka" );
-
         if(previous.equals("ViewPreviousOrdersList.fxml" )
                 || previous.equals("OrderSearch.fxml"))
             initializeForView();

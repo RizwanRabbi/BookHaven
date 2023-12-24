@@ -59,6 +59,7 @@ public class Database {
             System.out.println("User was not verified");
         }
         uInfo.print();
+        conn.close();
         return uInfo;
     }
     public static void updateUserInfo(UserInfo u) throws SQLException {
@@ -80,6 +81,7 @@ public class Database {
         ptsd.executeUpdate();
 
         Main.userInfo = Database.getUserInfo(Main.email);
+        conn.close();
     }
 
     public static void updateUserInfo(UserInfo u, File image) throws SQLException, FileNotFoundException {
@@ -110,6 +112,7 @@ public class Database {
         ptsd.executeUpdate();
 
         Main.userInfo = Database.getUserInfo(Main.email);
+        conn.close();
     }
 
     public static boolean accountAlreadyExists(String email) {
@@ -543,6 +546,7 @@ public class Database {
 
         for (int i=0; i<books.size();i++ )
         {
+            books.get(i).print();///////////////////////
             ptsd.setString(2, books.get(i).ISBN);
             ptsd.setInt(3, (int) books.get(i).price);
             ptsd.setInt(4, (int) books.get(i).willingToPurchaseQuantity);

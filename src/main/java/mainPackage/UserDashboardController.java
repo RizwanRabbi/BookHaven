@@ -44,7 +44,7 @@ public class UserDashboardController implements Initializable {
     private Button searchButton;
     @FXML
     public Label numberOfItems;
-    private static ArrayList<BookInfo> bookInfos;
+    public static ArrayList<BookInfo> bookInfos;
     private boolean findInCartArray(BookInfo bookInfo) {
         for(CartItem cartItem : Main.tempCart) {
             if(cartItem.ISBN.equals(bookInfo.ISBN))
@@ -132,6 +132,14 @@ public class UserDashboardController implements Initializable {
 
     private void displayBooks(ArrayList<BookInfo> bookInfos) throws IOException, SQLException {
         gridPane.getChildren().clear();
+        for(int i = 0; i < bookInfos.size();i++)
+        {
+            if(bookInfos.get(i).quantity == 0)
+            {
+                bookInfos.remove(i);
+                i--;
+            }
+        }
         for(int i = 0; i < bookInfos.size(); i++)
         {
             BookInfo bookInfo = bookInfos.get(i);

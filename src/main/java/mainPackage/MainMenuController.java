@@ -23,6 +23,7 @@ public class MainMenuController {
     }
     @FXML
     protected void onExitButtonClick(ActionEvent event) throws IOException {
+        UserDashboardController.bookInfos = null;
         SceneChanger.changeTo("UserDashboard.fxml", event);
     }
 
